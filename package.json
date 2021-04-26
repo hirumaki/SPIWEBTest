@@ -1,0 +1,11 @@
+{
+  "name": "SPIWEBTest",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/hirumaki/SPIWEBTest.git",
+  "author": "hirumaki <index3583@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.2.4"
+  }
+}
