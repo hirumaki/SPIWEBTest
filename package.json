@@ -1,8 +1,13 @@
 {
+  "scripts": {
+    "build": "tsc"
+  },
   "devDependencies": {
     "typescript": "^4.2.4"
   },
   "dependencies": {
+    "@types/jquery": "^3.5.5",
+    "jquery": "^3.6.0",
     "pug": "^3.0.2"
   }
 }
