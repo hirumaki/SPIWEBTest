@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue from "vue";
 
 const msg:string = 'HelloWorld';
 console.log(msg);
