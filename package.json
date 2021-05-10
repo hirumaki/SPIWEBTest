@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "init": "tsc --init",
     "build": "webpack"
   },
   "devDependencies": {

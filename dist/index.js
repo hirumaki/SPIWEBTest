@@ -16,7 +16,7 @@
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst vue_1 = __importDefault(__webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.js\"));\r\nconst msg = 'HelloWorld';\r\nconsole.log(msg);\r\nconsole.log('HEllo!!');\r\nconst app = new vue_1.default({\r\n    el: '#app',\r\n    data: {\r\n        message: 'Hello Vue!'\r\n    }\r\n});\r\n\n\n//# sourceURL=webpack:///./src/index.ts?");
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst vue_1 = __importDefault(__webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.js\"));\r\nconst msg = 'HelloWorld';\r\nconsole.log(msg);\r\nconsole.log('HEllo!!');\r\nconst app = new vue_1.default({\r\n    el: '#app',\r\n    data: {\r\n        message: 'Hello Vue!'\r\n    }\r\n});\r\nconst app2 = new vue_1.default({\r\n    el: '#app-2',\r\n    data: {\r\n        message: 'You loaded this page on ' + new Date().toLocaleString()\r\n    }\r\n});\r\n\n\n//# sourceURL=webpack:///./src/index.ts?");
 
 /***/ }),
 
