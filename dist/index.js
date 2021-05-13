@@ -16,7 +16,29 @@
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst vue_1 = __importDefault(__webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.js\"));\r\nconst msg = 'HelloWorld';\r\nconsole.log(msg);\r\nconsole.log('HEllo!!');\r\nconst app = new vue_1.default({\r\n    el: '#app',\r\n    data: {\r\n        message: 'Hello Vue!'\r\n    }\r\n});\r\nconst app2 = new vue_1.default({\r\n    el: '#app-2',\r\n    data: {\r\n        message: 'You loaded this page on ' + new Date().toLocaleString()\r\n    }\r\n});\r\n\n\n//# sourceURL=webpack:///./src/index.ts?");
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst vue_1 = __importDefault(__webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.js\"));\r\nconst problems_1 = __webpack_require__(/*! ./problems */ \"./src/problems.ts\");\r\nconst questionBody_1 = __webpack_require__(/*! ./questionBody */ \"./src/questionBody.ts\");\r\nlet problemCounter = 0;\r\nconst questionBody = questionBody_1.QuestionBody;\r\nconst confirmButton = vue_1.default.component('question-confirm-button', {\r\n    data: function () {\r\n        return {\r\n            problems: problems_1.problems,\r\n            count: problemCounter\r\n        };\r\n    },\r\n    template: `\r\n    <div>\r\n      <button v-on:click=\"nextProblem\">今、{{ count }}問目</button>\r\n      <p>答えは{{ problems[count].solution }}</p>\r\n    </div>`,\r\n    methods: {\r\n        nextProblem: function () {\r\n            this.count++;\r\n        }\r\n    }\r\n});\r\nconst answerField = vue_1.default.component('question-answer-field', {\r\n    data: () => {\r\n        return {\r\n            msg: '実験'\r\n        };\r\n    },\r\n    template: '<p> {{ msg }}</p>'\r\n});\r\nconst question = new vue_1.default({\r\n    el: '#question-field',\r\n    data: {\r\n        problems: problems_1.problems\r\n    }\r\n});\r\n\n\n//# sourceURL=webpack:///./src/index.ts?");
+
+/***/ }),
+
+/***/ "./src/problems.ts":
+/*!*************************!*\
+  !*** ./src/problems.ts ***!
+  \*************************/
+/***/ (function(__unused_webpack_module, exports) {
+
+"use strict";
+eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.problems = void 0;\r\nexports.problems = [\r\n    {\r\n        type: 'radio',\r\n        body: '10×5を計算しなさい',\r\n        choices: [15, 5, 50, 2],\r\n        solution: 50\r\n    },\r\n    {\r\n        type: 'radio',\r\n        body: '12×13を計算しなさい',\r\n        choices: [1, 25, 156, 180],\r\n        solution: 156\r\n    },\r\n    {\r\n        type: 'select',\r\n        body: '偶数を選びなさい',\r\n        choices: [1, 2, 3, 4, 5],\r\n        solution: [2, 4]\r\n    },\r\n];\r\n\n\n//# sourceURL=webpack:///./src/problems.ts?");
+
+/***/ }),
+
+/***/ "./src/questionBody.ts":
+/*!*****************************!*\
+  !*** ./src/questionBody.ts ***!
+  \*****************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.QuestionBody = void 0;\r\nconst vue_1 = __importDefault(__webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.js\"));\r\nconst problems_1 = __webpack_require__(/*! ./problems */ \"./src/problems.ts\");\r\nexports.QuestionBody = vue_1.default.component('questionBody', {\r\n    data: function () {\r\n        let counter = 0;\r\n        return {\r\n            counter: 0,\r\n            message: problems_1.problems[counter].body,\r\n            problems: problems_1.problems\r\n        };\r\n    },\r\n    template: `\n    <div>\n    <p2>{{ message }}</p2>\n    <button v-on:click=\"getNextProblem\">{{ counter+2 }}問目へ</button>\n    </div>`,\r\n    methods: {\r\n        getNextProblem: function () {\r\n            this.counter++;\r\n        }\r\n    },\r\n});\r\n\n\n//# sourceURL=webpack:///./src/questionBody.ts?");
 
 /***/ }),
 
