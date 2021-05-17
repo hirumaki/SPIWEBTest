@@ -11,15 +11,19 @@
 <body>
     <h1>Avalon Consulting SPI模試</h1>
 
-    <div id='question-field'>
-      
-      <question-body></question-body>
-      <question-statement></question-statement>
-      <question-answer-field></question-answer-field>
-      <question-confirm-button></question-confirm-button>
+    <div id='problem-field'>
+      <problem-number :number='counter'></problem-number>
+      <problem-body :problembody='problems[counter].body'></problem-body>
+      <problem-statement></problem-statement>
+      <problem-choice :number='counter' @nextproblem='nextProblem'></problem-choice>
+    </div>
+
+    <div id='sand-box'>
+      <comp1 v-bind:number='parentnum'></comp1>
+      <comp2></comp2>
+      <next-button v-bind:number = 'parentnum' @getnext='nextNum'></next-button>
     </div>
 
     <script src="./dist/index.js"></script>
 </body>
 </html>
-                                              

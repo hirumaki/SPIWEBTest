@@ -16,29 +16,62 @@
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst vue_1 = __importDefault(__webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.js\"));\r\nconst problems_1 = __webpack_require__(/*! ./problems */ \"./src/problems.ts\");\r\nconst questionBody_1 = __webpack_require__(/*! ./questionBody */ \"./src/questionBody.ts\");\r\nlet problemCounter = 0;\r\nconst questionBody = questionBody_1.QuestionBody;\r\nconst confirmButton = vue_1.default.component('question-confirm-button', {\r\n    data: function () {\r\n        return {\r\n            problems: problems_1.problems,\r\n            count: problemCounter\r\n        };\r\n    },\r\n    template: `\r\n    <div>\r\n      <button v-on:click=\"nextProblem\">今、{{ count }}問目</button>\r\n      <p>答えは{{ problems[count].solution }}</p>\r\n    </div>`,\r\n    methods: {\r\n        nextProblem: function () {\r\n            this.count++;\r\n        }\r\n    }\r\n});\r\nconst answerField = vue_1.default.component('question-answer-field', {\r\n    data: () => {\r\n        return {\r\n            msg: '実験'\r\n        };\r\n    },\r\n    template: '<p> {{ msg }}</p>'\r\n});\r\nconst question = new vue_1.default({\r\n    el: '#question-field',\r\n    data: {\r\n        problems: problems_1.problems\r\n    }\r\n});\r\n\n\n//# sourceURL=webpack:///./src/index.ts?");
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst vue_1 = __importDefault(__webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.js\"));\r\nconst problems_1 = __webpack_require__(/*! ./problemField/problems */ \"./src/problemField/problems.ts\");\r\nconst problemNumber_1 = __webpack_require__(/*! ./problemField/problemNumber */ \"./src/problemField/problemNumber.ts\");\r\nconst problemBody_1 = __webpack_require__(/*! ./problemField/problemBody */ \"./src/problemField/problemBody.ts\");\r\nconst problemStatement_1 = __webpack_require__(/*! ./problemField/problemStatement */ \"./src/problemField/problemStatement.ts\");\r\nconst problemChoice_1 = __webpack_require__(/*! ./problemField/problemChoice */ \"./src/problemField/problemChoice.ts\");\r\nconst question = new vue_1.default({\r\n    el: '#problem-field',\r\n    data: {\r\n        problems: problems_1.problems,\r\n        counter: 0\r\n    },\r\n    components: {\r\n        'problem-number': problemNumber_1.problemNumber,\r\n        'problem-body': problemBody_1.problemBody,\r\n        'problem-statement': problemStatement_1.problemStatement,\r\n        'problem-choice': problemChoice_1.problemChoice,\r\n    },\r\n    methods: {\r\n        nextProblem: function () {\r\n            this.counter++;\r\n        }\r\n    }\r\n});\r\n\n\n//# sourceURL=webpack:///./src/index.ts?");
 
 /***/ }),
 
-/***/ "./src/problems.ts":
-/*!*************************!*\
-  !*** ./src/problems.ts ***!
-  \*************************/
-/***/ (function(__unused_webpack_module, exports) {
-
-"use strict";
-eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.problems = void 0;\r\nexports.problems = [\r\n    {\r\n        type: 'radio',\r\n        body: '10×5を計算しなさい',\r\n        choices: [15, 5, 50, 2],\r\n        solution: 50\r\n    },\r\n    {\r\n        type: 'radio',\r\n        body: '12×13を計算しなさい',\r\n        choices: [1, 25, 156, 180],\r\n        solution: 156\r\n    },\r\n    {\r\n        type: 'select',\r\n        body: '偶数を選びなさい',\r\n        choices: [1, 2, 3, 4, 5],\r\n        solution: [2, 4]\r\n    },\r\n];\r\n\n\n//# sourceURL=webpack:///./src/problems.ts?");
-
-/***/ }),
-
-/***/ "./src/questionBody.ts":
-/*!*****************************!*\
-  !*** ./src/questionBody.ts ***!
-  \*****************************/
+/***/ "./src/problemField/problemBody.ts":
+/*!*****************************************!*\
+  !*** ./src/problemField/problemBody.ts ***!
+  \*****************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.QuestionBody = void 0;\r\nconst vue_1 = __importDefault(__webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.js\"));\r\nconst problems_1 = __webpack_require__(/*! ./problems */ \"./src/problems.ts\");\r\nexports.QuestionBody = vue_1.default.component('questionBody', {\r\n    data: function () {\r\n        let counter = 0;\r\n        return {\r\n            counter: 0,\r\n            message: problems_1.problems[counter].body,\r\n            problems: problems_1.problems\r\n        };\r\n    },\r\n    template: `\n    <div>\n    <p2>{{ message }}</p2>\n    <button v-on:click=\"getNextProblem\">{{ counter+2 }}問目へ</button>\n    </div>`,\r\n    methods: {\r\n        getNextProblem: function () {\r\n            this.counter++;\r\n        }\r\n    },\r\n});\r\n\n\n//# sourceURL=webpack:///./src/questionBody.ts?");
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.problemBody = void 0;\r\nconst vue_1 = __importDefault(__webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.js\"));\r\nexports.problemBody = vue_1.default.extend({\r\n    props: {\r\n        problembody: String\r\n    },\r\n    template: `\n    <div>\n    <p>{{ problembody }}</p>\n    </div>`,\r\n});\r\n\n\n//# sourceURL=webpack:///./src/problemField/problemBody.ts?");
+
+/***/ }),
+
+/***/ "./src/problemField/problemChoice.ts":
+/*!*******************************************!*\
+  !*** ./src/problemField/problemChoice.ts ***!
+  \*******************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.problemChoice = void 0;\r\nconst vue_1 = __importDefault(__webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.js\"));\r\nexports.problemChoice = vue_1.default.extend({\r\n    props: {\r\n        problemType: [],\r\n        problemChoice: String\r\n    },\r\n    template: `\n    <button @click=\"$emit('nextproblem')\">次の問題へ</button>`,\r\n});\r\n\n\n//# sourceURL=webpack:///./src/problemField/problemChoice.ts?");
+
+/***/ }),
+
+/***/ "./src/problemField/problemNumber.ts":
+/*!*******************************************!*\
+  !*** ./src/problemField/problemNumber.ts ***!
+  \*******************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.problemNumber = void 0;\r\nconst vue_1 = __importDefault(__webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.js\"));\r\nexports.problemNumber = vue_1.default.extend({\r\n    props: {\r\n        number: Number\r\n    },\r\n    template: `\n    <div>\n    <h2>第{{ number }}問</h2>\n    </div>`,\r\n});\r\n\n\n//# sourceURL=webpack:///./src/problemField/problemNumber.ts?");
+
+/***/ }),
+
+/***/ "./src/problemField/problemStatement.ts":
+/*!**********************************************!*\
+  !*** ./src/problemField/problemStatement.ts ***!
+  \**********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.problemStatement = void 0;\r\nconst vue_1 = __importDefault(__webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.js\"));\r\nexports.problemStatement = vue_1.default.extend({\r\n    props: {\r\n        problemBody: String\r\n    },\r\n    template: `\n    <div>\n    <p>{{ problemBody }}</p>\n    </div>`,\r\n});\r\n\n\n//# sourceURL=webpack:///./src/problemField/problemStatement.ts?");
+
+/***/ }),
+
+/***/ "./src/problemField/problems.ts":
+/*!**************************************!*\
+  !*** ./src/problemField/problems.ts ***!
+  \**************************************/
+/***/ (function(__unused_webpack_module, exports) {
+
+"use strict";
+eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.problems = void 0;\r\nexports.problems = [\r\n    {\r\n        type: 'radio',\r\n        body: '10×5を計算しなさい',\r\n        statement: '',\r\n        choices: [15, 5, 50, 2],\r\n        solution: 50\r\n    },\r\n    {\r\n        type: 'radio',\r\n        body: '12×13を計算しなさい',\r\n        statement: '',\r\n        choices: [1, 25, 156, 180],\r\n        solution: 156\r\n    },\r\n    {\r\n        type: 'select',\r\n        body: '偶数を選びなさい',\r\n        statement: '',\r\n        choices: [1, 2, 3, 4, 5],\r\n        solution: [2, 4]\r\n    },\r\n];\r\n\n\n//# sourceURL=webpack:///./src/problemField/problems.ts?");
 
 /***/ }),
 

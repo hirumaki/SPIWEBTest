@@ -1,45 +1,27 @@
 import Vue from "vue";
 import { Template } from "webpack";
-import {problems} from "./problems";
-import {QuestionBody} from "./questionBody";
-
-let problemCounter = 0;
-
-const questionBody = QuestionBody;
-
-const confirmButton = Vue.component('question-confirm-button',{
-  data: function(){
-    return{
-      problems,
-      count:problemCounter
-    }
-  },
-  template: `
-    <div>
-      <button v-on:click="nextProblem">今、{{ count }}問目</button>
-      <p>答えは{{ problems[count].solution }}</p>
-    </div>`,
-  methods:{
-    nextProblem:function(){
-      this.count++;
-    }
-  }
-});
-
-const answerField = Vue.component('question-answer-field',{
-    data:()=>{
-      return{
-      msg :'実験'
-      }
-    },
-    template:'<p> {{ msg }}</p>'
-
-})
+import {problems} from "./problemField/problems";
+import {problemNumber} from "./problemField/problemNumber";
+import {problemBody} from "./problemField/problemBody";
+import {problemStatement} from "./problemField/problemStatement";
+import {problemChoice} from "./problemField/problemChoice";
 
 const question = new Vue({
-  el: '#question-field',
+  el: '#problem-field',
   data:{
-    problems
+    problems,
+    counter:0
+  },
+  components:{
+    'problem-number':problemNumber,
+    'problem-body':problemBody,
+    'problem-statement':problemStatement,
+    'problem-choice':problemChoice,
+  },
+  methods:{
+    nextProblem:function(){
+      this.counter++;
+    }
   }
 })
 
