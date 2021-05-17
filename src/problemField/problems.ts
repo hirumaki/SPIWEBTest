@@ -1,16 +1,16 @@
 export const problems = [
     {
-      type:'radio',
-      body:'10×5を計算しなさい',
+      type:'IdiomStructure',
+      body:'次の熟語',
       statement:'',
-      choices:[15,5,50,2],
+      choices:[],
       solution:50
     },
     {
       type:'radio',
-      body:'12×13を計算しなさい',
-      statement:'',
-      choices:[1,25,156,180],
+      body:'日本のは東京',
+      statement:'カタカナを漢字に直した時、正しいものを答えなさい',
+      choices:[],
       solution:156
     },
     {
