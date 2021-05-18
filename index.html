@@ -13,9 +13,14 @@
 
     <div id='problem-field'>
       <problem-number :number='counter'></problem-number>
-      <problem-body :problembody='problems[counter].body'></problem-body>
-      <problem-statement></problem-statement>
-      <problem-choice :number='counter' :type='problems[counter].type' @nextproblem='nextProblem'></problem-choice>
+      <div class="problem-half">
+        <problem-body :problembody='problems[counter].body'></problem-body>
+        <problem-statement></problem-statement>
+      </div>
+      <div class="problem-half">
+        <div class="timer">タイマーエリア</div>
+        <problem-choice :number='counter' :type='problems[counter].type' @nextproblem='nextProblem'></problem-choice>
+      </div>
     </div>
 
     <div id='sand-box'>

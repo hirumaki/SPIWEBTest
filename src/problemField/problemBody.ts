@@ -7,6 +7,6 @@ export const problemBody = Vue.extend({
     },
     template: `
     <div class="problem-body">
-    <p>{{ problembody }}</p>
+        <p>{{ problembody }}</p>
     </div>`,
 });

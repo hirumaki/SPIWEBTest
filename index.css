@@ -1,1 +1,51 @@
-h2.title {color: red;  }
+/*色周りのスタイル*/
+.problem-body{
+    background-color:ghostwhite;
+    color:black;
+    overflow-y: scroll;
+}
+
+.problem-choices{
+    background-color: #999;
+}
+
+.problem-statement{
+    background-color: tomato;
+}
+
+.next-button{
+    border: 8px double #0090bb;
+}
+
+
+/*以下は、レスポンシブデザインのためのスタイル*/
+@media (min-width:0px)
+{
+    .problem-half{
+        display: inline-block; 
+        width:49.5%;
+        vertical-align:top; 
+    }
+
+    .problem-body{
+        width:100%;
+        height:400px;
+    }
+
+    .problem-statement{
+        width:100%;
+        height:200px;
+        margin: 0px;
+    }
+
+    .timer{
+        width: 100%;
+        height: 100px;
+    }
+
+    .problem-choices{
+        width: 100%;
+        height: 500px;
+    }
+
+}

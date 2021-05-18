@@ -7,6 +7,6 @@ export const problemNumber = Vue.extend({
     },
     template: `
     <div class="problem-number">
-    <h2>第{{ number }}問</h2>
+    <h2>第{{ number+1 }}問</h2>
     </div>`,
 });

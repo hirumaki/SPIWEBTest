@@ -6,7 +6,7 @@ export const problemStatement = Vue.extend({
         problemBody:String
     },
     template: `
-    <div>
-    <p>{{ problemBody }}</p>
+    <div class='problem-statement'>
+    <p>{{ problemBody }}問題本体</p>
     </div>`,
 });
