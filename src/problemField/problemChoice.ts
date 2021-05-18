@@ -9,7 +9,7 @@ const template = `
 
 
     <p v-else-if="problemType === 'BlankFixOfThreeSentences'">3文章穴埋めの問題</p>
-    <button @click="$emit('nextproblem')">次の問題へ</button>
+    <button class="next-button" @click="$emit('nextproblem')">次の問題へ</button>
 </div>
 
 `;
