@@ -19,7 +19,8 @@
 
 
 /*以下は、レスポンシブデザインのためのスタイル*/
-@media (min-width:0px)
+/*タブレット以上の場合*/
+@media (min-width:580px)
 {
     .problem-half{
         display: inline-block; 
@@ -49,3 +50,4 @@
     }
 
 }
+/*スマホ画面ぐらいの大きさの場合*/
