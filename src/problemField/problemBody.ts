@@ -6,7 +6,7 @@ export const problemBody = Vue.extend({
         problembody:String
     },
     template: `
-    <div>
+    <div class="problem-body">
     <p>{{ problembody }}</p>
     </div>`,
 });

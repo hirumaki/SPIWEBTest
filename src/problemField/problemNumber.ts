@@ -6,7 +6,7 @@ export const problemNumber = Vue.extend({
         number:Number
     },
     template: `
-    <div>
+    <div class="problem-number">
     <h2>第{{ number }}問</h2>
     </div>`,
 });
