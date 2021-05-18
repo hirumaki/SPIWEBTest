@@ -15,7 +15,7 @@
       <problem-number :number='counter'></problem-number>
       <problem-body :problembody='problems[counter].body'></problem-body>
       <problem-statement></problem-statement>
-      <problem-choice :number='counter' @nextproblem='nextProblem'></problem-choice>
+      <problem-choice :number='counter' :type='problems[counter].type' @nextproblem='nextProblem'></problem-choice>
     </div>
 
     <div id='sand-box'>

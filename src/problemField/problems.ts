@@ -1,16 +1,18 @@
 export const problems = [
     {
-      type:'radio',
-      body:'10×5を計算しなさい',
-      statement:'',
-      choices:[15,5,50,2],
+      //熟語の構造
+      type:'IdiomStructure',
+      body:'次の5つの熟語の構造について、',
+      statement:['因果','機微','美醜','日没','着衣'],
+      choices:[''],
       solution:50
     },
     {
-      type:'radio',
-      body:'12×13を計算しなさい',
-      statement:'',
-      choices:[1,25,156,180],
+      //3文の穴埋め
+      type:'BlankFixOfThreeSentences',
+      body:'日本のシュトは東京',
+      statement:'カタカナを漢字に直した時、正しいものを答えなさい',
+      choices:[],
       solution:156
     },
     {

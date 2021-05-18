@@ -38,7 +38,7 @@ eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod)
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.problemChoice = void 0;\r\nconst vue_1 = __importDefault(__webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.js\"));\r\nexports.problemChoice = vue_1.default.extend({\r\n    props: {\r\n        problemType: [],\r\n        problemChoice: String\r\n    },\r\n    template: `\n    <button @click=\"$emit('nextproblem')\">次の問題へ</button>`,\r\n});\r\n\n\n//# sourceURL=webpack:///./src/problemField/problemChoice.ts?");
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.problemChoice = void 0;\r\nconst vue_1 = __importDefault(__webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.js\"));\r\nconst template = `\n<div class=\"problem-choices\">\n    <div v-if=\"type === 'IdiomStructure'\">\n        \n    </div>\n\n\n\n    <p v-else-if=\"problemType === 'BlankFixOfThreeSentences'\">3文章穴埋めの問題</p>\n    <button @click=\"$emit('nextproblem')\">次の問題へ</button>\n</div>\n\n`;\r\nexports.problemChoice = vue_1.default.extend({\r\n    props: {\r\n        type: String,\r\n        problemChoice: Array,\r\n    },\r\n    template,\r\n});\r\n\n\n//# sourceURL=webpack:///./src/problemField/problemChoice.ts?");
 
 /***/ }),
 
@@ -71,7 +71,7 @@ eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod)
 /***/ (function(__unused_webpack_module, exports) {
 
 "use strict";
-eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.problems = void 0;\r\nexports.problems = [\r\n    {\r\n        type: 'radio',\r\n        body: '10×5を計算しなさい',\r\n        statement: '',\r\n        choices: [15, 5, 50, 2],\r\n        solution: 50\r\n    },\r\n    {\r\n        type: 'radio',\r\n        body: '12×13を計算しなさい',\r\n        statement: '',\r\n        choices: [1, 25, 156, 180],\r\n        solution: 156\r\n    },\r\n    {\r\n        type: 'select',\r\n        body: '偶数を選びなさい',\r\n        statement: '',\r\n        choices: [1, 2, 3, 4, 5],\r\n        solution: [2, 4]\r\n    },\r\n];\r\n\n\n//# sourceURL=webpack:///./src/problemField/problems.ts?");
+eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.problems = void 0;\r\nexports.problems = [\r\n    {\r\n        //熟語の構造\r\n        type: 'IdiomStructure',\r\n        body: '次の5つの熟語の構造について、',\r\n        statement: ['因果', '機微', '美醜', '日没', '着衣'],\r\n        choices: [''],\r\n        solution: 50\r\n    },\r\n    {\r\n        //3文の穴埋め\r\n        type: 'BlankFixOfThreeSentences',\r\n        body: '日本のシュトは東京',\r\n        statement: 'カタカナを漢字に直した時、正しいものを答えなさい',\r\n        choices: [],\r\n        solution: 156\r\n    },\r\n    {\r\n        type: 'select',\r\n        body: '偶数を選びなさい',\r\n        statement: '',\r\n        choices: [1, 2, 3, 4, 5],\r\n        solution: [2, 4]\r\n    },\r\n];\r\n\n\n//# sourceURL=webpack:///./src/problemField/problems.ts?");
 
 /***/ }),
 
