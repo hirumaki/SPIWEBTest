@@ -16,9 +16,10 @@
       <div class="problem-half">
         <problem-body :problembody='problems[counter].body'></problem-body>
         <problem-statement></problem-statement>
+        <single-timer></single-timer>
       </div>
       <div class="problem-half">
-        <div class="timer">タイマーエリア</div>
+        <section-timer></section-timer>
         <problem-choice :number='counter' :type='problems[counter].type' @nextproblem='nextProblem'></problem-choice>
       </div>
     </div>
