@@ -17,9 +17,68 @@
     border: 8px double #0090bb;
 }
 
+.body-block{
+    width: 6%;
+    height: 5px;
+}
+
+.margin-block{
+    width: 2%;
+    height: 5px;
+    background-color: white;
+}
+
+#single1{
+    background-color:#AAA;
+}
+
+#single2{
+    background-color:#AAA;
+}
+
+#single3{
+    background-color:#AAA;
+}
+
+#single4{
+    background-color:#AAA;
+}
+
+#single5{
+    background-color:#AAA;
+}
+
+#single6{
+    background-color:#888;
+}
+
+#single7{
+    background-color:#888;
+}
+
+#single8{
+    background-color:#888;
+}
+
+#single9{
+    background-color:#444;
+}
+
+#single10{
+    background-color:#444;
+}
+
+#single11{
+    background-color:#444;
+}
+
+#single12{
+    background-color:#444;
+}
 
 /*以下は、レスポンシブデザインのためのスタイル*/
-@media (min-width:0px)
+/*タブレット以上の場合*/
+@media (min-width:580px)
 {
     .problem-half{
         display: inline-block; 
@@ -49,3 +108,4 @@
     }
 
 }
+/*スマホ画面ぐらいの大きさの場合*/
