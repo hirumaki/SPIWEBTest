@@ -5,6 +5,7 @@ export const problems = [
       body:'次の5つの熟語の構造にとして正しいものを、選択肢ア～エからそれぞれ選びなさい',
       statement:['因果','機微','美醜','日没','着衣'],
       choices:['異なる意味を持つ漢字を並べている','主語と熟語の関係になっている','前の字が後の字を就職している','ア～ウのどれでもない'],
+      limit:5,
       solution:50
     },
     {
@@ -13,6 +14,7 @@ export const problems = [
       body:'以下の３つの文の意味がつながるように、空欄の中に当てはまる語句を、選択肢ア～オから選びなさい。ただし、同じ選択肢を用いることはありません。',
       statement:'',
       choices:[],
+      limit:5,
       solution:''
     },
     {
@@ -20,6 +22,7 @@ export const problems = [
       body:'次の１～４の空欄に選択肢ア～エの語句を並び替えて当てはめた時、最も意味の通る文章になる組み合わせを答えなさい。',
       statement:'',
       choices:[1,2,3,4,5],
+      limit:5,
       solution:[2,4]
     },
     {
@@ -27,6 +30,7 @@ export const problems = [
       body:'次の文章の１～３の空欄に当てはめるのに適切な言葉を、次のア～ウから１つずつ選びなさい。ただし、同じものが入ることはありません。',
       statement:'',
       choices:[1,2,3,4,5],
+      limit:5,
       solution:[2,4]
     },
     {
@@ -35,6 +39,7 @@ export const problems = [
       `,
       statement:'',
       choices:[1,2,3,4,5],
+      limit:5,
       solution:[2,4]
     },
     {
@@ -42,6 +47,7 @@ export const problems = [
       body:'次の文章の空欄に入れるのにふさわしい語句を、以下のア～エから選択しなさい。',
       statement:'',
       choices:[1,2,3,4,5],
+      limit:5,
       solution:[2,4]
     },
 
