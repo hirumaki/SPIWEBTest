@@ -1,12 +1,15 @@
 /*色周りのスタイル*/
 .problem-body{
-    background-color:ghostwhite;
     color:black;
     overflow-y: scroll;
 }
 
-.problem-choices{
+.answer-area{
     background-color: #999;
+}
+
+.body-and-sectiontimer{
+    background-color: aquamarine;
 }
 
 .problem-statement{
@@ -32,20 +35,31 @@
 /*タブレット以上の場合*/
 @media (min-width:580px)
 {
-    .problem-half{
+    .body-and-timer{
         display: inline-block; 
         width:49.5%;
         vertical-align:top; 
     }
 
-    .problem-body{
+    .second-half{
+        display: inline-block; 
+        width:49.5%;
+        vertical-align:top; 
+    }
+
+    .body-and-sectiontimer{
         width:100%;
         height:400px;
+        margin: 0px;
+    }
+
+    .problem-body{
+        height:300px;
     }
 
     .problem-statement{
         width:100%;
-        height:200px;
+        height:400px;
         margin: 0px;
     }
 
