@@ -12,13 +12,13 @@ export const problems = [
       //3文の穴埋め
       type:'OneBlankFixOfThreeSentences',
       body:'以下の３つの文の意味がつながるように、空欄の中に当てはまる語句を、選択肢ア～オから選びなさい。ただし、同じ選択肢を用いることはありません。',
-      statement:'',
+      statement:['',''],
       choices:[],
       limit:5,
       solution:''
     },
     {
-      type:'OrganizeFourElement',
+      type:'SortFourElement',
       body:'次の１～４の空欄に選択肢ア～エの語句を並び替えて当てはめた時、最も意味の通る文章になる組み合わせを答えなさい。',
       statement:'',
       choices:[1,2,3,4,5],

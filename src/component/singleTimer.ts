@@ -39,20 +39,18 @@ export const singleTimer = Vue.extend({
     data : function (){
         return {
             sec : 0,
-            limit : 5,
-            single1Color : 'background-color:#AAA;',
-            single2Color : 'background-color:#AAA;',
-            single3Color : 'background-color:#AAA;',
-            single4Color : 'background-color:#AAA;',
-            single5Color : 'background-color:#AAA;',
-            single6Color : 'background-color:#AAA;',
-            single7Color : 'background-color:#888;',
-            single8Color : 'background-color:#888;',
-            single9Color : 'background-color:#888;',
+            single1Color  : 'background-color:#AAA;',
+            single2Color  : 'background-color:#AAA;',
+            single3Color  : 'background-color:#AAA;',
+            single4Color  : 'background-color:#AAA;',
+            single5Color  : 'background-color:#AAA;',
+            single6Color  : 'background-color:#AAA;',
+            single7Color  : 'background-color:#888;',
+            single8Color  : 'background-color:#888;',
+            single9Color  : 'background-color:#888;',
             single10Color : 'background-color:#444;',
             single11Color : 'background-color:#444;',
             single12Color : 'background-color:#444;',
-
         }
     },
     methods:{
@@ -60,7 +58,6 @@ export const singleTimer = Vue.extend({
             let self = this;
             setInterval(()=>{
                 self.sec++;
-                console.log('count');
                 self.color();
             },1000);
         },
