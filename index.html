@@ -21,14 +21,13 @@
       <problem-number :number='counter'></problem-number>
       <div class='body-and-sectiontimer'>
         <problem-body 
-          :body='problems[counter].body'
-          :statements='problems[counter].statement'></problem-body>
+          :number = 'counter'
+          :problem='problems[counter]'></problem-body>
         <section-timer></section-timer>  
       </div>
       <problem-statement 
         :number='counter' 
-        :type='problems[counter].type'
-        :choices='problems[counter].choices' 
+        :problem='problems[counter]' 
         @nextproblem='nextProblem'></problem-statement>
       <single-timer :limit='problems[counter].limit'></single-timer>
       </div>
