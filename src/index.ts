@@ -1,5 +1,4 @@
 import Vue from "vue";
-import { Template } from "webpack";
 import {problems} from "./problemField/problems";
 import {problemNumber} from "./problemField/problemNumber";
 import {problemBody} from "./problemField/problemBody";
@@ -12,6 +11,7 @@ import { singleTimer} from "./component/singleTimer";
 const main = new Vue({
   el: '#problem-field',
   data:{
+    answer:[['']],
     problems,
     counter:0
   },
@@ -23,7 +23,9 @@ const main = new Vue({
     'problem-statement':problemStatement,
   },
   methods:{
-    nextProblem:function(){
+    nextProblem:function(answer:string[]){
+      this.answer.push(answer);
+      console.log(this.answer);
       this.counter++;
     }
   }
