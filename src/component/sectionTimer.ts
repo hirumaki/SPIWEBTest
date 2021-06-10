@@ -4,7 +4,7 @@ const template = `
 <div class="body-and-timer">
     <p>現在{{ second }}秒が経過しました。</p>
 </div>
-`
+`;
 
 export const sectionTimer = Vue.extend({
     template,

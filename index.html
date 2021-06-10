@@ -11,12 +11,12 @@
 </head>
 <body>
     <h1>Avalon Consulting SPI模試</h1>
-
+<!--
     <div id='top-page'>
-      <p>スタートボタンを押すと試験が開始されます。</p>
+      <button class='button button-primary' onclick="start()">スタートボタンを押すと試験が開始されます。</p>
       <start-button></start-button>
     </div>
-
+-->
     <div id='problem-field'>
       <problem-number :number='counter'></problem-number>
       <div class='body-and-sectiontimer'>
@@ -30,7 +30,16 @@
         :problem='problems[counter]' 
         @nextproblem='nextProblem'></problem-statement>
       <single-timer :limit='problems[counter].limit'></single-timer>
-      </div>
+    </div>
+
+    <div id='result-field'>
+      <h2>お疲れ様でした！！</h2>
+      <h3>結果</h3>
+        <result-body
+        :counter='counter'
+        :problems='problems'
+        :answers='answers'></result-body>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
     <script src="./dist/index.js"></script>
