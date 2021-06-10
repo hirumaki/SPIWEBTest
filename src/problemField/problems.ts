@@ -5,7 +5,8 @@ class Problem {
   questions: string[];
   choices: string[];
   limit: number;
-  solution: string|string[]|number|number[]; 
+  solution: string[]|number[]; 
+  points:number[];
 
   constructor(
     type:string,
@@ -14,8 +15,10 @@ class Problem {
     questions: string[],
     choices: string[],
     limit: number,
-    solution: string|string[]|number|number[]
-  ){
+    solution: string[]|number[],
+    points:number[]
+  )
+  {
     this.type = type;
     this.body = body;
     this.statement = statement;
@@ -23,6 +26,7 @@ class Problem {
     this.choices = choices;
     this.limit = limit;
     this.solution = solution;
+    this.points = points;
   }
 }
 export default Problem;
@@ -36,7 +40,8 @@ export const problems:Problem[] = [
   questions:array,
   choices:array,
   limit:number,
-  solution:array
+  solution:array,
+  points:array
 }
 */
 //言語分野
@@ -48,7 +53,8 @@ export const problems:Problem[] = [
       questions:[],
       choices:['異なる意味を持つ漢字を並べている','主語と熟語の関係になっている','前の字が後の字を修飾している','ア～ウのどれでもない'],
       limit:5,
-      solution:[]
+      solution:['ア','ウ','ア','イ','エ'],
+      points:[1,1,1,1,1]
     },
     {
       //3文の穴埋め ４つ
@@ -58,8 +64,10 @@ export const problems:Problem[] = [
       questions:[],
       choices:['ダミー１','３つ目の答え','１つ目の答え','ダミー','２つ目の答え'],
       limit:5,
-      solution:[]
+      solution:['ウ','オ','イ'],
+      points:[1,1,1,0,0]
     },
+    /*
     {
       //並び替え　３つ
       type:'SortFourElement',
@@ -68,7 +76,9 @@ export const problems:Problem[] = [
       questions:[],
       choices:['３番目の文章','１番目の文章','４番目の文章','２番目の文章'],
       limit:5,
-      solution:['2','4']
+      solution:['2','4'],
+      points:[1,1,1,1,1]
+
     },
     {
       //一文穴埋め３つ　３つ
@@ -78,7 +88,8 @@ export const problems:Problem[] = [
       questions:[],
       choices:[],
       limit:5,
-      solution:[2,4]
+      solution:[2,4],
+      points:[1,1,1,1,1]
     },
     {
       //長文読解　２つ
@@ -99,7 +110,8 @@ export const problems:Problem[] = [
         'Aは誤りだが、Bは正しい',
         'AもBも誤り'],
       limit:5,
-      solution:[]
+      solution:[],
+      points:[1,1,1,1,1]
     },
     {
       //一文穴埋め　３つ
@@ -109,7 +121,8 @@ export const problems:Problem[] = [
       questions:[],
       choices:[],
       limit:5,
-      solution:[2,4]
+      solution:[2,4],
+      points:[1,1,1,1,1]
     },
     //以下、非言語分野
     {
@@ -126,7 +139,8 @@ export const problems:Problem[] = [
       questions:[],      
       choices:[],
       limit:5,
-      solution:[]
+      solution:[],
+      points:[1,1,1,1,1]
     },
     {
       //未確定型の推論 ３つ
@@ -145,7 +159,8 @@ export const problems:Problem[] = [
         'AとBの両方が分かっても分からない'
       ],
       limit:4,
-      solution:'A'
+      solution:'A',
+      points:[1,1,1,1,1]
     },
     {
       //組み合わせ　１つ
@@ -156,7 +171,8 @@ export const problems:Problem[] = [
       questions:[],
       choices:[],
       limit:5,
-      solution:[]
+      solution:[],
+      points:[1,1,1,1,1]
     },
     {
       //表を見る問題　１つ
@@ -166,8 +182,8 @@ export const problems:Problem[] = [
       questions:[],
       choices:[],
       limit:5,
-      solution:[]
-
+      solution:[],
+      points:[1,1,1,1,1]
     },
     {
       //集合の問題　３つ
@@ -177,6 +193,7 @@ export const problems:Problem[] = [
       questions:[],
       choices:[],
       limit:5,
-      solution:[]
-    }
+      solution:[],
+      points:[1,1,1,1,1]
+    }*/
   ];

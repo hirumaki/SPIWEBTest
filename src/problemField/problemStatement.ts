@@ -82,7 +82,6 @@ const template = `
                         </th>
                         <th>
                             <input type="radio" name="question1" value="エ" v-model="question1">
-                            <span>question1:{{ question1 }}</span>
                         </th>
                     </tr>
                     <tr>
@@ -255,16 +254,16 @@ const template = `
                             <p>３</p>
                         </th>                
                         <th>
-                            <input type="radio" name="question3" value="ア">
+                            <input type="radio" name="question1" value="ア">
                         </th>
                         <th>
-                            <input type="radio" name="question3" value="イ">                
+                            <input type="radio" name="question2" value="イ">                
                         </th>
                         <th>
                             <input type="radio" name="question3" value="ウ">        
                         </th>
                         <th>
-                            <input type="radio" name="question3" value="エ">        
+                            <input type="radio" name="question4" value="エ">        
                         </th>
                     </tr>
                     <tr>
@@ -272,13 +271,13 @@ const template = `
                             <p>４</p>
                         </th>                
                         <th>
-                            <input type="radio" name="question4" value="ア">
+                            <input type="radio" name="question1" value="ア">
                         </th>
                         <th>
-                            <input type="radio" name="question4" value="イ">                
+                            <input type="radio" name="question2" value="イ">                
                         </th>
                         <th>
-                            <input type="radio" name="question4" value="ウ">        
+                            <input type="radio" name="question3" value="ウ">        
                         </th>
                         <th>
                             <input type="radio" name="question4" value="エ">        
