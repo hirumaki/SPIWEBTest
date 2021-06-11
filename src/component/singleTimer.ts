@@ -1,7 +1,7 @@
 import Vue from "vue";
 
 const template = `
-<div>
+<div id="single-timer">
     <div style='height:20px;'></div>
     <div style='display:flex;'>
         <div class='margin-block'></div>
