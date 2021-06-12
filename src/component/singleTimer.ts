@@ -80,8 +80,10 @@ export const singleTimer = Vue.extend({
             if(this.sec >= this.limit*11) this.single11Color = 'background-color:#ff0000;';
             if(this.sec >= this.limit*12) this.single12Color = 'background-color:#ff0000;';
             if(this.sec >= this.limit*13) {
+                if(this.counter <= 5){
                 console.log('time is up!! go to next');
                 this.$emit('nextproblem');//上手くいったけど別のエラー吐いた
+                }
             }
         }
     },

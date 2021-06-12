@@ -255,16 +255,16 @@ const template = `
                             <p>３</p>
                         </th>                
                         <th>
-                            <input type="radio" name="question1" value="ア">
+                            <input type="radio" name="question1" value="ウ">
                         </th>
                         <th>
-                            <input type="radio" name="question2" value="イ">                
+                            <input type="radio" name="question2" value="ウ">                
                         </th>
                         <th>
                             <input type="radio" name="question3" value="ウ">        
                         </th>
                         <th>
-                            <input type="radio" name="question4" value="エ">        
+                            <input type="radio" name="question4" value="ウ">        
                         </th>
                     </tr>
                     <tr>
@@ -272,13 +272,13 @@ const template = `
                             <p>４</p>
                         </th>                
                         <th>
-                            <input type="radio" name="question1" value="ア">
+                            <input type="radio" name="question1" value="エ">
                         </th>
                         <th>
-                            <input type="radio" name="question2" value="イ">                
+                            <input type="radio" name="question2" value="エ">                
                         </th>
                         <th>
-                            <input type="radio" name="question3" value="ウ">        
+                            <input type="radio" name="question3" value="エ">        
                         </th>
                         <th>
                             <input type="radio" name="question4" value="エ">        
