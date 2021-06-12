@@ -1,4 +1,5 @@
 import Vue from "vue";
+import axios from "axios";
 import {problems} from "./problemField/problems";
 import {problemNumber} from "./problemField/problemNumber";
 import {problemBody} from "./problemField/problemBody";
@@ -20,8 +21,41 @@ const start = ()=>{
 const sendResult = (result:object)=>{
   console.log('sendResult');
   console.log(result);
+  const serverUrl = 'http://triple-income.jp/test/sendmail.php';
+  console.log(serverUrl);
+  console.log('Ajaxします');
+  ajaxGet(serverUrl);
+  console.log('Ajaxしました');
   //console.log(mail);
 }
+
+const ajaxGet = (serverUrl:string) =>{
+  console.log('ajax start');
+  var request = new XMLHttpRequest();
+request.open("get", serverUrl, true);
+request.onload = function (event) {
+  if (request.readyState === 4) {
+    if (request.status === 200) {
+      console.log(request.statusText); // => "OK"
+    } else {
+      console.log(request.statusText); // => Error Message
+    }
+  }
+};
+request.onerror = function (event) {
+  console.log(event.type); // => "error"
+};
+request.send(null);
+}
+
+//Vue.component('single-timer',singleTimer);
+/*problemStatementクラスに下記コードを追加して上を起動
+       <single-timer
+        :limit='problem.limit'
+        :counter='counter'
+        @nextproblem='nextProblem'
+        ></single-timer>
+*/
 
 const main = new Vue({
   el: '#problem-field',

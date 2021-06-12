@@ -1,4 +1,5 @@
 import Vue from "vue";
+import { singleTimer } from "../component/singleTimer";
 
 //長文問題のみ、タブが存在するので、それに合わせてv-ifで場合分けしている。
 const template = `
@@ -456,6 +457,7 @@ const template = `
 
 export const problemStatement = Vue.extend({
     props:{
+            counter:Number,
             problem:Object
         },
     data:function(){
@@ -467,6 +469,7 @@ export const problemStatement = Vue.extend({
                 question5:'',
             }
         },
+
     methods:{
         resetData:function(){
             this.question1 = '';
