@@ -30,6 +30,7 @@
       <problem-statement 
         :counter='counter' 
         :problem='problems[counter]' 
+        :testlength='problems.length-1'
         @nextproblem='nextProblem'></problem-statement>
 <!--
         <single-timer 

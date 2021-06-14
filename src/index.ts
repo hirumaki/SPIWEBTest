@@ -22,32 +22,26 @@ const start = ()=>{
 const sendResult = (answers:string[][])=>{
   console.log('sendResult');
   let grades = 0;
-  //let fullScore = 0;
+  let fullScore = 0;
   answers.forEach((answer,index) => {
     if(index !== 0){
       const problem = problems[index-1] as Problem;
-      console.log(`answer:${answer}`);
-      console.log(`problem.sol:${problem.solution}`);    
       answer.forEach((ans,id)=>{
-        if ( id !== 0){
-          console.log(`ans:${ans}`);
-          console.log(`sol:${problem.solution[id]}`);
-          if (ans === problem.solution[id]) grades+=problem.points[index];
-        }
-        //fullScore += problem.points[index];
+          if (ans === problem.solution[id] && problem.solution[id] !== ''){ 
+            grades+=problem.points[index];
+          }
+      fullScore += problem.points[index];
       });
     }
-  });
+  }); 
+
   const serverUrl = `http://triple-income.jp/web_test/sendmail.php?score=${grades}`;
-  console.log(serverUrl);
-  console.log('Ajaxします');
+  const date = new Date();
+  console.log(`${date.getTime}:発火しました。`)
   ajaxGet(serverUrl);
-  console.log('Ajaxしました');
-  //console.log(mail);
 }
 
 const ajaxGet = (serverUrl:string) =>{
-  console.log('ajax start');
   var request = new XMLHttpRequest();
 request.open("get", serverUrl, true);
 request.onload = function (event) {
@@ -65,14 +59,8 @@ request.onerror = function (event) {
 request.send(null);
 }
 
-//Vue.component('single-timer',singleTimer);
-/*problemStatementクラスに下記コードを追加して上を起動
-       <single-timer
-        :limit='problem.limit'
-        :counter='counter'
-        @nextproblem='nextProblem'
-        ></single-timer>
-*/
+Vue.component('single-timer',singleTimer);
+
 
 const main = new Vue({
   el: '#problem-field',
@@ -93,16 +81,15 @@ const main = new Vue({
       this.answers.push(answer);
       result.answers = this.answers;
       result.counter = this.counter;
-      this.counter++;
-      if(this.counter === problems.length){
+      if(this.counter === problems.length-2){//counterを動かさないので、vue.jsの描画が止まる
         const problemField = document.getElementById('problem-field');
         if(problemField !== null) problemField.style.display = 'none';
         const resultField = document.getElementById('result-field');
         if(resultField !== null) resultField.style.display = 'block';
-        //this.counter -= 1;
         sendResult(this.answers);
         //sendResult(3);
       }
+      this.counter++;
     }
   }
 });
