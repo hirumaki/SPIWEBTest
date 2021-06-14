@@ -68,7 +68,9 @@
     }
 
     #single-timer{
-        width:50%;
+        position: relative;
+        left :10%;
+        width:80%;
     }
 
     .timer{

@@ -54,6 +54,7 @@ function initialState (){
 export const singleTimer = Vue.extend({
     template,
     props :{
+        testlength:Number,
         limit:Number,
         counter:Number
     },    
@@ -79,8 +80,11 @@ export const singleTimer = Vue.extend({
             if(this.sec >= this.limit*10) this.single10Color = 'background-color:#ffa500;';
             if(this.sec >= this.limit*11) this.single11Color = 'background-color:#ff0000;';
             if(this.sec >= this.limit*12) this.single12Color = 'background-color:#ff0000;';
-            if(this.sec >= this.limit*13) {
-                if(this.counter <= 5){
+            if(this.sec === this.limit*13) {
+                console.log(`this.counter=${this.counter}`);
+                console.log(`this.testlength=${this.testlength}`);
+                if(this.counter < this.testlength){
+                    console.log(`limit:${this.limit}`);
                 console.log('time is up!! go to next');
                 this.$emit('nextproblem');//上手くいったけど別のエラー吐いた
                 }

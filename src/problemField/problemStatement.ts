@@ -56,6 +56,13 @@ const template = `
                 {{ ['ア','イ','ウ','エ','オ'][index] }}:{{ choice }}
             </p>
         </div>
+       <single-timer        
+       :limit='problem.limit'
+       :counter='counter'
+       :testlength='testlength'
+       @nextproblem='nextProblem'
+       ></single-timer>
+
     </div>
     <div id="answer-area" class="second-half">回答欄
         <form id="answer-form">
@@ -211,26 +218,26 @@ const template = `
                 <table> 
                     <tr>
                         <th></th>
-                        <th>１</th>
-                        <th>２</th>
-                        <th>３</th>
-                        <th>４</th>
+                        <th>ア</th>
+                        <th>イ</th>
+                        <th>ウ</th>
+                        <th>エ</th>
                     </tr>
                     <tr>
                         <th>
-                            <p>ア</p>
+                            <p>１</p>
                         </th>                
                         <th>
-                            <input type="radio" name="question1" value="ア">
+                            <input type="radio" name="question1" value="ア" v-model="question1">
                         </th>
                         <th>
-                            <input type="radio" name="question2" value="ア">                
+                            <input type="radio" name="question1" value="イ" v-model="question1">                
                         </th>
                         <th>
-                            <input type="radio" name="question3" value="ア">        
+                            <input type="radio" name="question1" value="ウ" v-model="question1">        
                         </th>
                         <th>
-                            <input type="radio" name="question4" value="ア">        
+                            <input type="radio" name="question1" value="エ" v-model="question1">        
                         </th>
                     </tr>
                     <tr>
@@ -238,16 +245,16 @@ const template = `
                             <p>２</p>
                         </th>                
                         <th>
-                            <input type="radio" name="question1" value="イ">
+                            <input type="radio" name="question2" value="ア" v-model="question2">
                         </th>
                         <th>
-                            <input type="radio" name="question2" value="イ">                
+                            <input type="radio" name="question2" value="イ"  v-model="question2">
                         </th>
                         <th>
-                            <input type="radio" name="question3" value="イ">        
+                            <input type="radio" name="question2" value="ウ"  v-model="question2">        
                         </th>
                         <th>
-                            <input type="radio" name="question4" value="イ">        
+                            <input type="radio" name="question2" value="エ"  v-model="question2">        
                         </th>
                     </tr>
                     <tr>
@@ -255,16 +262,16 @@ const template = `
                             <p>３</p>
                         </th>                
                         <th>
-                            <input type="radio" name="question1" value="ウ">
+                            <input type="radio" name="question3" value="ア" v-model="question3">
                         </th>
                         <th>
-                            <input type="radio" name="question2" value="ウ">                
+                            <input type="radio" name="question3" value="イ"  v-model="question3">                
                         </th>
                         <th>
-                            <input type="radio" name="question3" value="ウ">        
+                            <input type="radio" name="question3" value="ウ"  v-model="question3">        
                         </th>
                         <th>
-                            <input type="radio" name="question4" value="ウ">        
+                            <input type="radio" name="question3" value="エ"  v-model="question3">        
                         </th>
                     </tr>
                     <tr>
@@ -272,16 +279,16 @@ const template = `
                             <p>４</p>
                         </th>                
                         <th>
-                            <input type="radio" name="question1" value="エ">
+                            <input type="radio" name="question4" value="ア"  v-model="question4">
                         </th>
                         <th>
-                            <input type="radio" name="question2" value="エ">                
+                            <input type="radio" name="question4" value="イ"  v-model="question4">                
                         </th>
                         <th>
-                            <input type="radio" name="question3" value="エ">        
+                            <input type="radio" name="question4" value="ウ"  v-model="question4">        
                         </th>
                         <th>
-                            <input type="radio" name="question4" value="エ">        
+                            <input type="radio" name="question4" value="エ"  v-model="question4">        
                         </th>
                     </tr>
                 </table>
@@ -458,7 +465,8 @@ const template = `
 export const problemStatement = Vue.extend({
     props:{
             counter:Number,
-            problem:Object
+            problem:Object,
+            testlength:Number,//singleTimerに連携する為のプロパティ
         },
     data:function(){
             return{
@@ -477,6 +485,35 @@ export const problemStatement = Vue.extend({
             this.question3 = '';
             this.question4 = '';
             this.question5 = '';
+        },
+        nextProblem:function(){
+            this.$emit(
+                'nextproblem',
+                [
+                    this.question1,
+                    this.question2,
+                    this.question3,
+                    this.question4,
+                    this.question5]);
+            console.log('afterNextProblem');
+            this.resetData();
+        }
+    },
+    watch:{
+        question1:function(){
+            console.log(`q1:${this.question1}`);
+        },
+        question2:function(){
+            console.log(`q2:${this.question2}`);
+        },
+        question3:function(){
+            console.log(`q3:${this.question3}`);
+        },
+        question4:function(){
+            console.log(`q4:${this.question4}`);
+        },
+        question5:function(){
+            console.log(`q5:${this.question5}`);
         }
     },
     template,
