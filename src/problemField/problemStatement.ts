@@ -2,6 +2,8 @@ import Vue from "vue";
 import { singleTimer } from "../component/singleTimer";
 
 //長文問題のみ、タブが存在するので、それに合わせてv-ifで場合分けしている。
+//選択肢を使う問題は、問題数、選択肢数でラジオボタンを二次元配置する形にしている。
+//自由入力型の問題は、入力欄を表示し、それをquestion1の値へ埋め込んでいる。
 const template = `
 <div v-if="problem.type==='LongSentenceReading'" class="problem-statement">
     <ul class="nav nav-tabs" role="tablist">
@@ -130,395 +132,32 @@ const template = `
     </div>
     <div id="answer-area" class="second-half">回答欄
         <form id="answer-form">
-            <div v-if="problem.type === 'IdiomStructure'">熟語の構造問題
+            <div v-if="[
+                'IdiomStructure',
+                'SortFourElement',
+                'OneBlankFixOfThreeSentences',
+                'ThreeBlanksFixOfOneSentence',
+                'OneBlankFixOfOneSentence',
+            ].includes(problem.type)">
                 <table> 
                     <tr>
                         <th></th>
-                        <th>ア</th>
-                        <th>イ</th>
-                        <th>ウ</th>
-                        <th>エ</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <p>１</p>
-                        </th>                
-                        <th>
-                            <input type="radio" name="question1" value="ア" v-model="question1">
-                        </th>
-                        <th>
-                            <input type="radio" name="question1" value="イ" v-model="question1">                
-                        </th>
-                        <th>
-                            <input type="radio" name="question1" value="ウ" v-model="question1">        
-                        </th>
-                        <th>
-                            <input type="radio" name="question1" value="エ" v-model="question1">
+                        <th v-for='(choice,index) in problem.choices'>
+                            {{['ア','イ','ウ','エ','オ'][index]}}
                         </th>
                     </tr>
-                    <tr>
+                    <tr v-for='(question,index) in problem.statement'>
                         <th>
-                            <p>２</p>
-                        </th>                
-                        <th>
-                            <input type="radio" name="question2" value="ア" v-model="question2">
-                        </th>   
-                        <th>
-                            <input type="radio" name="question2" value="イ" v-model="question2">                
-                        </th>
-                        <th>
-                            <input type="radio" name="question2" value="ウ" v-model="question2">        
-                        </th>
-                        <th>
-                            <input type="radio" name="question2" value="エ" v-model="question2">
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <p>３</p>
-                        </th>
-                        <th>
-                            <input type="radio" name="question3" value="ア" v-model="question3">
-                        </th>
-                        <th>
-                            <input type="radio" name="question3" value="イ" v-model="question3">                
-                        </th>
-                        <th>
-                            <input type="radio" name="question3" value="ウ" v-model="question3">        
-                        </th>
-                        <th>
-                            <input type="radio" name="question3" value="エ" v-model="question3">
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <p>４</p>
-                        </th>
-                        <th>
-                            <input type="radio" name="question4" value="ア" v-model="question4">
-                        </th>
-                        <th>
-                            <input type="radio" name="question4" value="イ" v-model="question4">                
-                        </th>
-                        <th>
-                            <input type="radio" name="question4" value="ウ" v-model="question4">        
-                        </th>
-                        <th>
-                            <input type="radio" name="question4" value="エ" v-model="question4">
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <p>５</p>
-                        </th>
-                        <th>
-                            <input type="radio" name="question5" value="ア" v-model="question5">
-                        </th>
-                        <th>
-                            <input type="radio" name="question5" value="イ" v-model="question5">                
-                        </th>
-                        <th>
-                            <input type="radio" name="question5" value="ウ" v-model="question5">        
-                        </th>
-                        <th>
-                            <input type="radio" name="question5" value="エ" v-model="question5">
-                        </th>
+                            <p>{{ index + 1 }}</p>
+                        </th>     
+                        <th v-for='(choice,choiceNum) in problem.choices'>                        
+                            <input type="radio" :name='"question"+(index+1)' :value="['ア','イ','ウ','エ','オ'][choiceNum]" v-model="$data['question'+ (index+1)]">
+                        </th>           
                     </tr>
                 </table>
-            </div>
-            <div v-if="problem.type === 'OneBlankFixOfThreeSentences'">3文章穴埋めの問題
-                <table> 
-                    <tr>
-                        <th></th>
-                        <th>ア</th>
-                        <th>イ</th>
-                        <th>ウ</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <p>１</p>
-                        </th>                
-                        <th>
-                            <input type="radio" name="question1" value="ア" v-model="question1">
-                        </th>
-                        <th>
-                            <input type="radio" name="question1" value="イ" v-model="question1">   
-                        </th>
-                        <th>
-                            <input type="radio" name="question1" value="ウ" v-model="question1">        
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <p>２</p>
-                        </th>                
-                        <th>
-                            <input type="radio" name="question2" value="ア" v-model="question2">
-                        </th>   
-                        <th>
-                            <input type="radio" name="question2" value="イ" v-model="question2">                
-                        </th>
-                        <th>
-                            <input type="radio" name="question2" value="ウ" v-model="question2">        
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <p>３</p>
-                        </th>
-                        <th>
-                            <input type="radio" name="question3" value="ア" v-model="question3">
-                        </th>
-                        <th>
-                            <input type="radio" name="question3" value="イ" v-model="question3">                
-                        </th>
-                        <th>
-                            <input type="radio" name="question3" value="ウ" v-model="question3">        
-                        </th>
-                    </tr>
-                </table>
-            </div>
-            <div v-if="problem.type === 'SortFourElement'">文章並び替えの問題
-                <table> 
-                    <tr>
-                        <th></th>
-                        <th>ア</th>
-                        <th>イ</th>
-                        <th>ウ</th>
-                        <th>エ</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <p>１</p>
-                        </th>                
-                        <th>
-                            <input type="radio" name="question1" value="ア" v-model="question1">
-                        </th>
-                        <th>
-                            <input type="radio" name="question1" value="イ" v-model="question1">                
-                        </th>
-                        <th>
-                            <input type="radio" name="question1" value="ウ" v-model="question1">        
-                        </th>
-                        <th>
-                            <input type="radio" name="question1" value="エ" v-model="question1">        
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <p>２</p>
-                        </th>                
-                        <th>
-                            <input type="radio" name="question2" value="ア" v-model="question2">
-                        </th>
-                        <th>
-                            <input type="radio" name="question2" value="イ"  v-model="question2">
-                        </th>
-                        <th>
-                            <input type="radio" name="question2" value="ウ"  v-model="question2">        
-                        </th>
-                        <th>
-                            <input type="radio" name="question2" value="エ"  v-model="question2">        
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <p>３</p>
-                        </th>                
-                        <th>
-                            <input type="radio" name="question3" value="ア" v-model="question3">
-                        </th>
-                        <th>
-                            <input type="radio" name="question3" value="イ"  v-model="question3">                
-                        </th>
-                        <th>
-                            <input type="radio" name="question3" value="ウ"  v-model="question3">        
-                        </th>
-                        <th>
-                            <input type="radio" name="question3" value="エ"  v-model="question3">        
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <p>４</p>
-                        </th>                
-                        <th>
-                            <input type="radio" name="question4" value="ア"  v-model="question4">
-                        </th>
-                        <th>
-                            <input type="radio" name="question4" value="イ"  v-model="question4">                
-                        </th>
-                        <th>
-                            <input type="radio" name="question4" value="ウ"  v-model="question4">        
-                        </th>
-                        <th>
-                            <input type="radio" name="question4" value="エ"  v-model="question4">        
-                        </th>
-                    </tr>
-                </table>
-            </div>
-            <div v-if="problem.type === 'ThreeBlanksFixOfOneSentence'">1文章3つ穴埋め
-                <table> 
-                    <tr>
-                        <th></th>
-                        <th>ア</th>
-                        <th>イ</th>
-                        <th>ウ</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <p>１</p>
-                        </th>                
-                        <th>
-                            <input type="radio" name="question1" value="ア">
-                        </th>
-                        <th>
-                            <input type="radio" name="question1" value="イ">                
-                        </th>
-                        <th>
-                            <input type="radio" name="question1" value="ウ">        
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <p>２</p>
-                        </th>                
-                        <th>
-                            <input type="radio" name="question2" value="ア">
-                        </th>   
-                        <th>
-                            <input type="radio" name="question2" value="イ">                
-                        </th>
-                        <th>
-                            <input type="radio" name="question2" value="ウ">        
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <p>３</p>
-                        </th>
-                        <th>
-                            <input type="radio" name="question3" value="ア">
-                        </th>
-                        <th>
-                            <input type="radio" name="question3" value="イ">                
-                        </th>
-                        <th>
-                            <input type="radio" name="question3" value="ウ">        
-                        </th>
-                    </tr>
-                </table>
-            </div>
-            <div v-if="problem.type === 'LongSentenceReading'">長文読解
-                <table> 
-                    <tr>
-                        <th></th>
-                        <th>ア</th>
-                        <th>イ</th>
-                        <th>ウ</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <p>１</p>
-                        </th>                
-                        <th>
-                            <input type="radio" name="question1" value="ア">
-                        </th>
-                        <th>
-                            <input type="radio" name="question1" value="イ">                
-                        </th>
-                        <th>
-                            <input type="radio" name="question1" value="ウ">        
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <p>２</p>
-                        </th>                
-                        <th>
-                            <input type="radio" name="question2" value="ア">
-                        </th>   
-                        <th>
-                            <input type="radio" name="question2" value="イ">                
-                        </th>
-                        <th>
-                            <input type="radio" name="question2" value="ウ">        
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <p>３</p>
-                        </th>
-                        <th>
-                            <input type="radio" name="question3" value="ア">
-                        </th>
-                        <th>
-                            <input type="radio" name="question3" value="イ">                
-                        </th>
-                        <th>
-                            <input type="radio" name="question3" value="ウ">        
-                        </th>
-                    </tr>
-                </table>
-            </div>
-            <div v-if="problem.type === 'OneBlankFixOfOneSentence'">1文章穴埋め
-                <table> 
-                    <tr>
-                        <th></th>
-                        <th>ア</th>
-                        <th>イ</th>
-                        <th>ウ</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <p>１</p>
-                        </th>                
-                        <th>
-                            <input type="radio" name="question1" value="ア">
-                        </th>
-                        <th>
-                            <input type="radio" name="question1" value="イ">                
-                        </th>
-                        <th>
-                            <input type="radio" name="question1" value="ウ">        
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <p>２</p>
-                        </th>                
-                        <th>
-                            <input type="radio" name="question2" value="ア">
-                        </th>   
-                        <th>
-                            <input type="radio" name="question2" value="イ">                
-                        </th>
-                        <th>
-                            <input type="radio" name="question2" value="ウ">        
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <p>３</p>
-                        </th>
-                        <th>
-                            <input type="radio" name="question3" value="ア">
-                        </th>
-                        <th>
-                            <input type="radio" name="question3" value="イ">                
-                        </th>
-                        <th>
-                            <input type="radio" name="question3" value="ウ">        
-                        </th>
-                    </tr>
-                </table>
-            </div>
+            </div> 
             <div v-if="problem.type === 'fixBlank'">
                 <input type="text" name ="question1">
-            </div>
-
-            <div v-if="problem.type === 'selectOneFromChoices'">
-                <input type="radio" name="question1" value="ア">ア
             </div>
         </form>
         <button class="next-button" @click="score();$emit('nextproblem',[question1,question2,question3,question4,question5]);resetData()">次の問題へ</button>
@@ -558,7 +197,8 @@ export const problemStatement = Vue.extend({
                     this.question2,
                     this.question3,
                     this.question4,
-                    this.question5]);
+                    this.question5,
+                ]);
             console.log('afterNextProblem');
             this.resetData();
         },
