@@ -1,5 +1,4 @@
 import Vue from "vue";
-import Problem from "./problems";
 
 
 export const problemBody = Vue.extend({
