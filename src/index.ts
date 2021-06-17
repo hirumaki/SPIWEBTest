@@ -1,13 +1,13 @@
 import Vue from "vue";
-import axios from "axios";
-import {imitationSpiWeb1} from "./problemSets/imitationSpiWeb1";
-import {problemNumber} from "./problemField/problemNumber";
-import {problemBody} from "./problemField/problemBody";
-import {problemStatement} from "./problemField/problemStatement";
+import { imitationSpiWeb1 } from "./problemSets/imitationSpiWeb1";
+import { WhiteAcademyPractice1} from "./problemSets/WhiteAcademyPractice1";
+import { problemNumber} from "./problemField/problemNumber";
+import { problemBody } from "./problemField/problemBody";
+import { problemStatement } from "./problemField/problemStatement";
 import { sectionTimer } from "./component/sectionTimer";
-import { singleTimer} from "./component/singleTimer";
-import { setTimer} from "./component/setTimer";
-import { resultBody} from "./resultField/resultBody";
+import { singleTimer } from "./component/singleTimer";
+import { setTimer } from "./component/setTimer";
+import { resultBody } from "./resultField/resultBody";
 import { Problem } from "./problem";
 
 Vue.prototype.$count = 0;
@@ -28,7 +28,6 @@ if(startButton !== null) startButton.onclick = ()=>{
     },
     components:{
       'section-timer':sectionTimer,
-      //'single-timer':singleTimer,
       'problem-number':problemNumber,
       'problem-body':problemBody,
       'problem-statement':problemStatement,
@@ -74,8 +73,6 @@ if(startButton !== null) startButton.onclick = ()=>{
       }
     }
   });
-  
-
 }
 
 const sendResult = (answers:string[][])=>{
@@ -102,20 +99,20 @@ const sendResult = (answers:string[][])=>{
 
 const ajaxGet = (serverUrl:string) =>{
   var request = new XMLHttpRequest();
-request.open("get", serverUrl, true);
-request.onload = function (event) {
-  if (request.readyState === 4) {
-    if (request.status === 200) {
-      console.log(request.statusText); // => "OK"
-    } else {
-      console.log(request.statusText); // => Error Message
+  request.open("get", serverUrl, true);
+  request.onload = function (event) {
+    if (request.readyState === 4) {
+      if (request.status === 200) {
+        console.log(request.statusText); // => "OK"
+      } else {
+        console.log(request.statusText); // => Error Message
+      }
     }
-  }
-};
-request.onerror = function (event) {
-  console.log(event.type); // => "error"
-};
-request.send(null);
+  };
+  request.onerror = function (event) {
+    console.log(event.type); // => "error"
+  };
+  request.send(null);
 }
 
 Vue.component('single-timer',singleTimer);

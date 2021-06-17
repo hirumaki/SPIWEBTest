@@ -26,10 +26,21 @@ export const imitationSpiWeb1:Problem[] = [
       points:[1,1,1,1,1]
     },
     {
+      //熟語の構造 ３つ
+      type:'IdiomStructure',
+      body:'次の5つの熟語の構造にとして正しいものを、選択肢ア～エからそれぞれ選びなさい',
+      statement:['因果','機微','美醜'],
+      questions:[],
+      choices:['異なる意味を持つ漢字を並べている','主語と熟語の関係になっている','前の字が後の字を修飾している'],
+      limit:5,
+      solution:['ア','ウ','ア'],
+      points:[1,1,1]
+    },
+    {
       //並び替え　３つ
       type:'SortFourElement',
       body:'次の１～４の空欄に選択肢ア～エの語句を並び替えて当てはめた時、最も意味の通る文章になる組み合わせを答えなさい。',
-      statement:['植物が冬を越す方法はいくつかあり、[１]、[２]、[３]、[４]の２つに大別される。'],
+      statement:['植物が冬を越す方法はいくつかあり、[１]','[２]','[３]','[４]の２つに大別される。'],
       questions:[],
       choices:[
         '秋に花を咲かせ',
@@ -38,8 +49,41 @@ export const imitationSpiWeb1:Problem[] = [
         '冬は低く葉を広げ、根に栄養を蓄え'],
       limit:5,
       solution:['ア','ウ','エ','イ',''],
-      points:[2,1,1,1,0]
+      points:[2,0,0,0,0]
 
+    },
+    {
+      //3文の穴埋め ４つ
+      type:'OneBlankFixOfThreeSentences',
+      body:'以下の３つの文の意味がつながるように、空欄の中に当てはまる語句を、選択肢ア～オから選びなさい。ただし、同じ選択肢を用いることはありません。',
+      statement:['１つ目の文章[  ]','２つ目の文章[  ]','３つ目の文章[  ]'],
+      questions:[],
+      choices:['ダミー１','３つ目の答え','１つ目の答え','ダミー','２つ目の答え'],
+      limit:5,
+      solution:['ウ','オ','イ'],
+      points:[1,1,1,0,0]
+    },
+    {
+      //一文穴埋め３つ　３つ
+      type:'ThreeBlanksFixOfOneSentence',
+      body:'次の文章の１～３の空欄に当てはめるのに適切な言葉を、次のア～ウから１つずつ選びなさい。ただし、同じものが入ることはありません。',
+      statement:['文章の中身は[ 1 ] だから','[ 2 ] よって','[ 3 ] となる'],
+      questions:[],
+      choices:['','',''],
+      limit:5,
+      solution:[2,4],
+      points:[1,1,1,1,1]
+    },
+    {
+      //一文穴埋め　３つ
+      type:'OneBlankFixOfOneSentence',
+      body:'次の文章の空欄に入れるのにふさわしい語句を、以下のア～エから選択しなさい。',
+      statement:['This is an [  ]'],
+      questions:[],
+      choices:['banana','earth','apple','oxen'],
+      limit:5,
+      solution:[2,4],
+      points:[1,1,1,1,1]
     },
     {
       //テスト終了時の空問題（エラーを吐かせないための処置）
@@ -128,9 +172,9 @@ export const imitationSpiWeb1:Problem[] = [
       //一文穴埋め　３つ
       type:'OneBlankFixOfOneSentence',
       body:'次の文章の空欄に入れるのにふさわしい語句を、以下のア～エから選択しなさい。',
-      statement:[''],
+      statement:['This is an [  ]'],
       questions:[],
-      choices:[],
+      choices:['banana','earth','apple','oxen'],
       limit:5,
       solution:[2,4],
       points:[1,1,1,1,1]

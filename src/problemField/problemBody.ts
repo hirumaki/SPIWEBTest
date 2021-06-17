@@ -13,7 +13,16 @@ export const problemBody = Vue.extend({
             <p>{{ problem.body }}</p>
         </div>
         <div class="statement">
-            <div v-if="problem.statement.length !=1">
+            <div v-if="
+                [
+                    'SortFourElement',
+                    'ThreeBlanksFixOfOneSentence'
+                ].includes(problem.type)">
+                <span v-for="statement in problem.statement">
+                    {{ statement }}
+                </span>   
+            </div>
+            <div v-else-if="problem.statement.length !=1">
                 <div v-for="(statement,index) in problem.statement">
                     <p>
                         {{ index+1 }}:{{ statement }}
