@@ -5,13 +5,29 @@ import { problemNumber} from "./problemField/problemNumber";
 import { problemBody } from "./problemField/problemBody";
 import { problemStatement } from "./problemField/problemStatement";
 import { sectionTimer } from "./component/sectionTimer";
+import { startScreen} from "./component/startScreen";
 import { singleTimer } from "./component/singleTimer";
 import { setTimer } from "./component/setTimer";
 import { resultBody } from "./resultField/resultBody";
 import { Problem } from "./problem";
 
 Vue.prototype.$count = 0;
-const problems = imitationSpiWeb1; 
+let problems:Problem[]; 
+let candidateStatus:{name:string,mail:string,test:object};
+
+const startView = new Vue({
+  el:'#top-page',
+  components:{
+    'start-screen':startScreen
+  },
+  methods:{
+    registerCandidate: function(candidateData:{name:string,mail:string,test:Object}){
+      candidateStatus = candidateData;
+      problems = candidateData.test as Problem[];
+    }
+  
+  }
+})
 
 const startButton = document.getElementById('start-button');
 if(startButton !== null) startButton.onclick = ()=>{
@@ -91,9 +107,9 @@ const sendResult = (answers:string[][])=>{
     }
   }); 
 
-  const serverUrl = `http://triple-income.jp/web_test/sendmail.php?score=${grades}`;
+  const serverUrl = `http://triple-income.jp/web_test/sendmail.php?score=${grades}&name=${candidateStatus.name}`;
   const date = new Date();
-  console.log(`${date.getTime}:発火しました。`)
+  console.log(`${serverUrl}でajaxしました。`)
   //ajaxGet(serverUrl);
 }
 
@@ -117,4 +133,3 @@ const ajaxGet = (serverUrl:string) =>{
 
 Vue.component('single-timer',singleTimer);
 Vue.component('set-timer',setTimer);
-
