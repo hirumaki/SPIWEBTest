@@ -1,37 +1,6 @@
-class Problem {
-  type: string;
-  body: string;
-  statement: string[];
-  questions: string[];
-  choices: string[];
-  limit: number;
-  solution: string[]|number[]; 
-  points:number[];
+import { Problem } from "../problem";
 
-  constructor(
-    type:string,
-    body:string,
-    statement:string[],
-    questions: string[],
-    choices: string[],
-    limit: number,
-    solution: string[]|number[],
-    points:number[]
-  )
-  {
-    this.type = type;
-    this.body = body;
-    this.statement = statement;
-    this.questions = questions;
-    this.choices = choices;
-    this.limit = limit;
-    this.solution = solution;
-    this.points = points;
-  }
-}
-export default Problem;
-
-export const problems:Problem[] = [
+export const imitationSpiWeb1:Problem[] = [
 //problemの型
 /* {
   type:string,
@@ -44,7 +13,7 @@ export const problems:Problem[] = [
   points:array
 }
 */
-//言語分野
+//言語分野 
     {
       //熟語の構造 ３つ
       type:'IdiomStructure',
@@ -69,7 +38,7 @@ export const problems:Problem[] = [
         '冬は低く葉を広げ、根に栄養を蓄え'],
       limit:5,
       solution:['ア','ウ','エ','イ',''],
-      points:[1,1,1,1,0]
+      points:[2,1,1,1,0]
 
     },
     {
@@ -85,6 +54,17 @@ export const problems:Problem[] = [
 
   },
     /*
+      {
+      //熟語の構造 ３つ
+      type:'IdiomStructure',
+      body:'次の5つの熟語の構造にとして正しいものを、選択肢ア～エからそれぞれ選びなさい',
+      statement:['因果','機微','美醜','日没','着衣'],
+      questions:[],
+      choices:['異なる意味を持つ漢字を並べている','主語と熟語の関係になっている','前の字が後の字を修飾している','ア～ウのどれでもない'],
+      limit:5,
+      solution:['ア','ウ','ア','イ','エ'],
+      points:[1,1,1,1,1]
+    },
     {
       //3文の穴埋め ４つ
       type:'OneBlankFixOfThreeSentences',
@@ -95,6 +75,21 @@ export const problems:Problem[] = [
       limit:5,
       solution:['ウ','オ','イ'],
       points:[1,1,1,0,0]
+    },
+    {
+      //並び替え　３つ
+      type:'SortFourElement',
+      body:'次の１～４の空欄に選択肢ア～エの語句を並び替えて当てはめた時、最も意味の通る文章になる組み合わせを答えなさい。',
+      statement:['植物が冬を越す方法はいくつかあり、[１]、[２]、[３]、[４]の２つに大別される。'],
+      questions:[],
+      choices:[
+        '秋に花を咲かせ',
+        '春になると共に茎をのばし、花を咲かせるもの',
+        '冬に種子を残すことで冬を越すものと',
+        '冬は低く葉を広げ、根に栄養を蓄え'],
+      limit:5,
+      solution:['ア','ウ','エ','イ',''],
+      points:[2,1,1,1,0]
     },
     {
       //一文穴埋め３つ　３つ

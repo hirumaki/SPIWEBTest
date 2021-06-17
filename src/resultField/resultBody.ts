@@ -1,5 +1,5 @@
 import Vue from "vue";
-import Problem from "../problemField/problems";
+import { Problem } from "../problem";
 
 
 const template =  `

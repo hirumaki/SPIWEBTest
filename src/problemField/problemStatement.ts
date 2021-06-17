@@ -49,6 +49,70 @@ const template = `
         </div>
     </div>
 </div>
+<div v-else-if="problem.type==='selectOneFromChoicesSet'" class="problem-statement">
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="one-tab" data-bs-toggle="tab" href="#one" aria-controls="home" aria-selected="true">1</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="two-tab" data-bs-toggle="tab" href='#two' aria-controls="home" aria-selected="true">2</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="three-tab" data-bs-toggle="tab" href="#three" aria-controls="home" aria-selected="true">3</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="questionTabContent">
+        <div class="tab-pane active" id="one" role="tabpanel" aria-labelledby="one-tab">    
+            <div class="statement-area second-half">
+                <p v-html="problem.questions[0]"></p>
+                <single-timer        
+                :limit='problem.limit'
+                :counter='counter'
+                :testlength='testlength'
+                @nextproblem='nextProblem'
+                ></single-timer>
+            </div>
+            <div id="answer-area" class="second-half">
+                <form id="answer-form">
+                </form>
+                <button class="next-button" @click="$emit('nextproblem')">次の問題へ</button>
+            </div>
+        </div>
+        <div class="tab-pane" id="two" role="tabpanel" aria-labelledby="two-tab">    
+            <div class="statement-area second-half">
+                <p v-html="problem.questions[1]"></p>
+                <set-timer        
+                :limit='problem.limit'
+                :counter='counter'
+                :testlength='testlength'
+                @nextproblem='nextProblem'
+                ></set-timer>
+            </div>
+            <div id="answer-area" class="second-half">
+                <form id="answer-form"></form>
+                <button class="next-button" @click="$emit('nextproblem')">次の問題へ</button>
+            </div>
+        </div>
+        <div class="tab-pane" id="three" role="tabpanel" aria-labelledby="three-tab">    
+            <div class="statement-area second-half">
+                <p v-html="problem.questions[2]"></p>
+                <div v-for="(choice,index) in problem.choices">
+                    <p>{{ ['ア','イ','ウ','エ','オ'][index] }}:{{ choice }}</p>
+                </div>
+                <set-timer        
+                :limit='problem.limit'
+                :counter='counter'
+                :testlength='testlength'
+                @nextproblem='nextProblem'
+                ></set-timer>
+            </div>
+            <div id="answer-area" class="second-half">
+                <form id="answer-form"></form>    
+                <button class="next-button" @click="$emit('nextproblem')">次の問題へ</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div v-else class="problem-statement">
     <div class="statement-area second-half">選択肢
         <div v-for="(choice,index) in problem.choices">
@@ -457,7 +521,7 @@ const template = `
                 <input type="radio" name="question1" value="ア">ア
             </div>
         </form>
-        <button class="next-button" @click="$emit('nextproblem',[question1,question2,question3,question4,question5]);resetData()">次の問題へ</button>
+        <button class="next-button" @click="score();$emit('nextproblem',[question1,question2,question3,question4,question5]);resetData()">次の問題へ</button>
     </div>
 </div>
 `;
@@ -497,6 +561,36 @@ export const problemStatement = Vue.extend({
                     this.question5]);
             console.log('afterNextProblem');
             this.resetData();
+        },
+        score:function(){
+            let score = 0;
+            let fullScore = 0;
+            const solution = this.problem.solution;
+            const answer = [
+                this.question1,
+                this.question2,
+                this.question3,
+                this.question4,
+                this.question5];
+            switch (this.problem.type){
+                case 'SortFourElement':
+                case 'ThreeBlankFixOfOneSentence':
+                    let successFlg = true;
+                    answer.forEach((ans,index)=>{
+                        if (ans !== solution[index] && solution[index] !== '') successFlg = false;                        
+                    });
+                    if(successFlg) score += this.problem.points[0];
+                    fullScore += this.problem.points[0];
+                    break;
+                case 'LongSentenceReading':
+                    break;
+                default:
+                    answer.forEach((ans,index)=>{
+                        if (ans === solution[index] && solution[index] !== '') score += this.problem.points[index]
+                        fullScore += this.problem.points[index];
+                    })
+            }
+            console.log(`score of previous problem is ${score}/${fullScore}`);
         }
     },
     watch:{
