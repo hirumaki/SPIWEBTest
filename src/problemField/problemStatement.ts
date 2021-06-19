@@ -1,5 +1,5 @@
 import Vue from "vue";
-import { singleTimer } from "../component/singleTimer";
+import { Problem } from "../problem";
 
 //長文問題のみ、タブが存在するので、それに合わせてv-ifで場合分けしている。
 //選択肢を使う問題は、問題数、選択肢数でラジオボタンを二次元配置する形にしている。
@@ -24,8 +24,22 @@ const template = `
             </div>
             <div id="answer-area" class="second-half">
                 <form id="answer-form">
+                    <table> 
+                        <tr>
+                            <th></th>
+                            <th v-for="choice in ['ア','イ','ウ','エ']">
+                                {{ choice }}
+                            </th>
+                        </tr>
+                        <tr>
+                            <th></th>     
+                            <th v-for="(choice,index) in ['ア','イ','ウ','エ']">                        
+                                <input type="radio" :name='question1' :value="choice" v-model="$data['question1']">
+                            </th>           
+                        </tr>
+                    </table>
                 </form>
-                <button class="next-button" @click="$emit('nextproblem')">次の問題へ</button>
+                <button class="next-button" @click="nextProblem();resetData()">次の問題へ</button>
             </div>
         </div>
         <div class="tab-pane" id="two" role="tabpanel" aria-labelledby="two-tab">    
@@ -33,8 +47,10 @@ const template = `
                 <p v-html="problem.questions[1]"></p>
             </div>
             <div id="answer-area" class="second-half">
-                <form id="answer-form"></form>
-                <button class="next-button" @click="$emit('nextproblem')">次の問題へ</button>
+                <form id="answer-form">
+                    <input type="text" name ="question1" v-model='question2'>
+                </form>
+                <button class="next-button" @click="nextProblem();resetData()">次の問題へ</button>
             </div>
         </div>
         <div class="tab-pane" id="three" role="tabpanel" aria-labelledby="three-tab">    
@@ -45,8 +61,23 @@ const template = `
                 </div>
             </div>
             <div id="answer-area" class="second-half">
-                <form id="answer-form"></form>    
-                <button class="next-button" @click="$emit('nextproblem')">次の問題へ</button>
+                <form id="answer-form">
+                    <table> 
+                        <tr>
+                            <th></th>
+                            <th v-for='(choice,index) in problem.choices'>
+                                {{['ア','イ','ウ','エ','オ'][index]}}
+                            </th>
+                        </tr>
+                        <tr>
+                            <th></th>     
+                            <th v-for='(choice,choiceNum) in problem.choices'>                        
+                                <input type="radio" :name='question3' :value="['ア','イ','ウ','エ','オ'][choiceNum]" v-model="$data['question3']">
+                            </th>           
+                        </tr>
+                    </table>
+                </form>    
+                <button class="next-button" @click="nextProblem();resetData()">次の問題へ</button>
             </div>
         </div>
     </div>
@@ -126,7 +157,7 @@ const template = `
        :limit='problem.limit'
        :counter='counter'
        :testlength='testlength'
-       @nextproblem='nextProblem'
+       @timeup='nextProblem'
        ></single-timer>
 
     </div>
@@ -157,10 +188,10 @@ const template = `
                 </table>
             </div> 
             <div v-if="problem.type === 'fixBlank'">
-                <input type="text" name ="question1">
+                <input type="text" name ="question1" v-model='question1'>
             </div>
         </form>
-        <button class="next-button" @click="score();$emit('nextproblem',[question1,question2,question3,question4,question5]);resetData()">次の問題へ</button>
+        <button class="next-button" @click="nextProblem();resetData()">次の問題へ</button>
     </div>
 </div>
 `;
@@ -190,34 +221,23 @@ export const problemStatement = Vue.extend({
             this.question5 = '';
         },
         nextProblem:function(){
-            this.$emit(
-                'nextproblem',
-                [
-                    this.question1,
-                    this.question2,
-                    this.question3,
-                    this.question4,
-                    this.question5,
-                ]);
-            console.log('afterNextProblem');
-            this.resetData();
-        },
-        score:function(){
             let score = 0;
             let fullScore = 0;
-            const solution = this.problem.solution;
+            let quest = this.problem as Problem;
+            const solution = quest.solution;
             const answer = [
                 this.question1,
                 this.question2,
                 this.question3,
                 this.question4,
                 this.question5];
+            //採点のロジック
             switch (this.problem.type){
                 case 'SortFourElement':
                 case 'ThreeBlankFixOfOneSentence':
                     let successFlg = true;
                     answer.forEach((ans,index)=>{
-                        if (ans !== solution[index] && solution[index] !== '') successFlg = false;                        
+                        if (ans !== solution[index] && solution[index] !== undefined) successFlg = false;                        
                     });
                     if(successFlg) score += this.problem.points[0];
                     fullScore += this.problem.points[0];
@@ -225,13 +245,20 @@ export const problemStatement = Vue.extend({
                 case 'LongSentenceReading':
                     break;
                 default:
-                    answer.forEach((ans,index)=>{
-                        if (ans === solution[index] && solution[index] !== '') score += this.problem.points[index]
-                        fullScore += this.problem.points[index];
-                    })
+                    solution.forEach((sol: string|number,index:number)=>{
+                        console.log(`sol:${sol}`);
+                        console.log(`ans:${answer[index]}`);
+                        if (answer[index] === sol) score += quest.points[index]
+                        fullScore += quest.points[index]; 
+                    });
             }
-            console.log(`score of previous problem is ${score}/${fullScore}`);
-        }
+            //ここまで採点のロジック
+            this.$emit(
+                'nextproblem',{score,fullScore});
+            this.resetData();
+            score = 0;
+            fullScore = 0;
+        },
     },
     watch:{
         question1:function(){

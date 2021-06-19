@@ -1,6 +1,4 @@
 import Vue from "vue";
-import { imitationSpiWeb1 } from "./problemSets/imitationSpiWeb1";
-import { WhiteAcademyPractice1} from "./problemSets/WhiteAcademyPractice1";
 import { problemNumber} from "./problemField/problemNumber";
 import { problemBody } from "./problemField/problemBody";
 import { problemStatement } from "./problemField/problemStatement";
@@ -38,7 +36,8 @@ if(startButton !== null) startButton.onclick = ()=>{
   const main = new Vue({
     el: '#problem-field',
     data:{
-      answers:[['']],
+      score:0,
+      fullScore:0,
       problems,
       counter:0//問題番号のカウンター
     },
@@ -49,20 +48,20 @@ if(startButton !== null) startButton.onclick = ()=>{
       'problem-statement':problemStatement,
     },
     methods:{
-      nextProblem:function(answer:string[]){
-        this.answers.push(answer);
-        result.answers = this.answers;
-        result.counter = this.counter;
+      nextProblem:function(resultscore:{score:number,fullScore:number}){
+        this.score += resultscore.score;
+        this.fullScore += resultscore.fullScore;
+        console.log(`this.score:${this.score}`);
         if(this.counter === problems.length-2){//counterを動かさないので、vue.jsの描画が止まる
           const problemField = document.getElementById('problem-field');
           if(problemField !== null) problemField.style.display = 'none';
           const resultField = document.getElementById('result-field');
           if(resultField !== null) resultField.style.display = 'block';
-          sendResult(this.answers);
-          //sendResult(3);
+          result.showResult({score:this.score,fullScore:this.fullScore});
+          //sendResult({score:this.score,fullScore:this.fullScore});
         }
         this.counter++;
-      }
+      },
     }
   });
   
@@ -71,17 +70,20 @@ if(startButton !== null) startButton.onclick = ()=>{
     data:{
       problems,
       counter:0,
-      answers:[['']],
-      linguisticResult:[['']],
-      nonlinguisticResult:[['']],
-      comprehensiveResult:[['']],
+      score:0,
+      fullScore:0
     },
     components:{
       'result-body':resultBody
     },
     methods:{
-      showResult:function(answers:string[][]){
-        this.answers = answers;
+      showResult:function(resultscore:{score:number,fullScore:number}){
+        this.score = resultscore.score;
+        this.fullScore = resultscore.fullScore;
+        console.log(`resultscore.score:${resultscore.score}`);
+        console.log(`resultscore.fullScore:${resultscore.fullScore}`);
+        console.log(`result.score:${this.score}`);
+        console.log(`result.fullScore:${this.fullScore}`);
         /*for (let proNum =1;proNum <= problems.length;proNum++){
           const  = problems[proNum];
   
@@ -91,29 +93,9 @@ if(startButton !== null) startButton.onclick = ()=>{
   });
 }
 
-const sendResult = (answers:string[][])=>{
-  console.log('sendResult');
-  let grades = 0;
-  let fullScore = 0;
-  answers.forEach((answer,index) => {
-    if(index !== 0){
-      const problem = problems[index-1] as Problem;
-      answer.forEach((ans,id)=>{
-          if (ans === problem.solution[id] && problem.solution[id] !== ''){ 
-            grades+=problem.points[index];
-          }
-      fullScore += problem.points[index];
-      });
-    }
-  }); 
-
-  const serverUrl = `http://triple-income.jp/web_test/sendmail.php?score=${grades}&name=${candidateStatus.name}`;
-  const date = new Date();
-  console.log(`${serverUrl}でajaxしました。`)
-  //ajaxGet(serverUrl);
-}
-
-const ajaxGet = (serverUrl:string) =>{
+const sendResult = (result:{score:number,fullScore:number})=>{
+  const serverUrl = `http://triple-income.jp/web_test/sendmail.php?score=${result.score}&name=${candidateStatus.name}`;
+  console.log(`${serverUrl}でajaxします。`)
   var request = new XMLHttpRequest();
   request.open("get", serverUrl, true);
   request.onload = function (event) {

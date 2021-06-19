@@ -86,7 +86,7 @@ export const singleTimer = Vue.extend({
                 if(this.counter < this.testlength){
                     console.log(`limit:${this.limit}`);
                 console.log('time is up!! go to next');
-                this.$emit('nextproblem');//上手くいったけど別のエラー吐いた
+                this.$emit('timeup');//上手くいったけど別のエラー吐いた
                 }
             }
         }
