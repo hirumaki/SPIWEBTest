@@ -2,6 +2,7 @@ import Vue from "vue";
 import { Problem } from "../problem";
 import { imitationSpiWeb1 } from "../problemSets/imitationSpiWeb1";
 import { WhiteAcademyPractice1} from "../problemSets/WhiteAcademyPractice1";
+import { WhiteAcademyTest1 } from "../problemSets/WhiteAcademyTest1";
 
 const template = `
 <div class="start-screen">
@@ -16,8 +17,9 @@ const template = `
     <div class="test-type-area">
         <p>受験したいテストを選んで下さい</p>
         <select name="testtype" v-model="testType">
-            <option :value="imitationSpiWeb1">SPIWEbテスト1</option>
+            <option :value="imitationSpiWeb1" selected>SPIWEbテスト1</option>
             <option :value="WhiteAcademyPractice1">WhiteAcademy練習1</option>
+            <option :value="WhiteAcademyTest1">WhiteAcademyテスト1</option>
         </select>
     </div>
     <div id ='start-button' class="btn btn-primary" @click="startExam">start</div>
@@ -32,7 +34,8 @@ export const startScreen = Vue.extend({
             candidateEmail:'',
             testType:Object,
             imitationSpiWeb1,
-            WhiteAcademyPractice1
+            WhiteAcademyPractice1,
+            WhiteAcademyTest1
         }
     },
     methods:{
