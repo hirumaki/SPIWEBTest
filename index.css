@@ -5,11 +5,11 @@
 }
 
 .answer-area{
-    background-color: #999;
+    background-color:white;
 }
 
 .body-and-sectiontimer{
-    background-color: aquamarine;
+    background-color: whitesmoke;
 }
 
 .problem-statement{
@@ -41,6 +41,15 @@
 
 #result-field{
     display: none;
+}
+
+.small-question-field{
+    background-color: lightgreen;
+}
+
+.small-question-num{
+    background-color: green;
+    color:white;
 }
 
 /*以下は、レスポンシブデザインのためのスタイル*/
@@ -76,6 +85,12 @@
     }
 
     #single-timer{
+        position: relative;
+        left :10%;
+        width:80%;
+    }
+
+    .set-timer{
         position: relative;
         left :10%;
         width:80%;

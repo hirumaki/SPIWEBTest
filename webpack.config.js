@@ -24,7 +24,7 @@ module.exports = {
     },
     // import 文で .ts ファイルを解決するため
     resolve: {
-      extensions: [".ts"],
+      extensions: [".ts",".js"],
       // Webpackで利用するときの設定
       alias: {
         vue: "vue/dist/vue.js"

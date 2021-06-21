@@ -2,7 +2,7 @@ import Vue from "vue";
 //組問題の2,3問目用のタイマー。タイムアップによるNextProblemがないだけ
 
 const template = `
-<div id="set-timer">
+<div class="set-timer">
     <div style='height:20px;'></div>
     <div style='display:flex;'>
         <div class='margin-block'></div>
@@ -81,21 +81,14 @@ export const setTimer = Vue.extend({
             if(this.sec >= this.limit*10) this.single10Color = 'background-color:#ffa500;';
             if(this.sec >= this.limit*11) this.single11Color = 'background-color:#ff0000;';
             if(this.sec >= this.limit*12) this.single12Color = 'background-color:#ff0000;';
-            if(this.sec === this.limit*13) {
-                console.log(`this.counter=${this.counter}`);
-                console.log(`this.testlength=${this.testlength}`);
-            }
         }
     },
     created: function(){
         this.count();
-        console.log(`timer.counter = ${this.counter}`);
     },
     watch:{
         counter:function(){
             Object.assign(this.$data,initialState());
-            console.log(`timer.sec:${this.sec}`);
-            console.log(this.counter);
         }
     },
 
