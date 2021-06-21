@@ -1,4 +1,5 @@
 import Vue from "vue";
+import axios from "axios";
 import { problemNumber} from "./problemField/problemNumber";
 import { problemBody } from "./problemField/problemBody";
 import { problemStatement } from "./problemField/problemStatement";
@@ -23,7 +24,6 @@ const startView = new Vue({
       candidateStatus = candidateData;
       problems = candidateData.test as Problem[];
     }
-  
   }
 })
 
@@ -80,14 +80,12 @@ if(startButton !== null) startButton.onclick = ()=>{
       showResult:function(resultscore:{score:number,fullScore:number}){
         this.score = resultscore.score;
         this.fullScore = resultscore.fullScore;
+        /*
         console.log(`resultscore.score:${resultscore.score}`);
         console.log(`resultscore.fullScore:${resultscore.fullScore}`);
         console.log(`result.score:${this.score}`);
         console.log(`result.fullScore:${this.fullScore}`);
-        /*for (let proNum =1;proNum <= problems.length;proNum++){
-          const  = problems[proNum];
-  
-        }*/
+       */
       }
     }
   });
@@ -95,22 +93,8 @@ if(startButton !== null) startButton.onclick = ()=>{
 
 const sendResult = (result:{score:number,fullScore:number})=>{
   const serverUrl = `http://triple-income.jp/web_test/sendmail.php?score=${result.score}&name=${candidateStatus.name}`;
-  console.log(`${serverUrl}でajaxします。`)
-  var request = new XMLHttpRequest();
-  request.open("get", serverUrl, true);
-  request.onload = function (event) {
-    if (request.readyState === 4) {
-      if (request.status === 200) {
-        console.log(request.statusText); // => "OK"
-      } else {
-        console.log(request.statusText); // => Error Message
-      }
-    }
-  };
-  request.onerror = function (event) {
-    console.log(event.type); // => "error"
-  };
-  request.send(null);
+  //console.log(`${serverUrl}でajaxします。`)
+  axios.get(serverUrl);
 }
 
 Vue.component('single-timer',singleTimer);

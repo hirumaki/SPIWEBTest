@@ -21,6 +21,12 @@ const template = `
         <div class="tab-pane active" id="one" role="tabpanel" aria-labelledby="one-tab">    
             <div class="statement-area second-half">
                 <p v-html="problem.questions[0]"></p>
+                <single-timer        
+                :limit='problem.limit'
+                :counter='counter'
+                :testlength='testlength'
+                @timeup='nextProblem'
+                ></single-timer>
             </div>
             <div id="answer-area" class="second-half">
                 <form id="answer-form">
@@ -45,10 +51,17 @@ const template = `
         <div class="tab-pane" id="two" role="tabpanel" aria-labelledby="two-tab">    
             <div class="statement-area second-half">
                 <p v-html="problem.questions[1]"></p>
+                <set-timer        
+                :limit='problem.limit'
+                :counter='counter'
+                :testlength='testlength'
+                @nextproblem='nextProblem'
+                ></set-timer>
             </div>
             <div id="answer-area" class="second-half">
                 <form id="answer-form">
                     <input type="text" name ="question1" v-model='question2'>
+                    <input type="text" name="dummy" style="display:none;">
                 </form>
                 <button class="next-button" @click="nextProblem();resetData()">次の問題へ</button>
             </div>
@@ -59,6 +72,12 @@ const template = `
                 <div v-for="(choice,index) in problem.choices">
                     <p>{{ ['ア','イ','ウ','エ','オ'][index] }}:{{ choice }}</p>
                 </div>
+                <set-timer        
+                :limit='problem.limit'
+                :counter='counter'
+                :testlength='testlength'
+                @nextproblem='nextProblem'
+                ></set-timer>
             </div>
             <div id="answer-area" class="second-half">
                 <form id="answer-form">
@@ -169,6 +188,7 @@ const template = `
                 'OneBlankFixOfThreeSentences',
                 'ThreeBlanksFixOfOneSentence',
                 'OneBlankFixOfOneSentence',
+                'selectOneFromChoices'
             ].includes(problem.type)">
                 <table> 
                     <tr>
@@ -177,10 +197,11 @@ const template = `
                             {{['ア','イ','ウ','エ','オ'][index]}}
                         </th>
                     </tr>
-                    <tr v-for='(question,index) in problem.statement'>
-                        <th>
+                    <tr class='small-question-field' v-for='(question,index) in problem.statement'>
+                        <th class='small-question-num' v-if='problem.statement.length >= 2'>
                             <p>{{ index + 1 }}</p>
-                        </th>     
+                        </th>
+                        <th v-else></th>
                         <th v-for='(choice,choiceNum) in problem.choices'>                        
                             <input type="radio" :name='"question"+(index+1)' :value="['ア','イ','ウ','エ','オ'][choiceNum]" v-model="$data['question'+ (index+1)]">
                         </th>           
@@ -189,6 +210,10 @@ const template = `
             </div> 
             <div v-if="problem.type === 'fixBlank'">
                 <input type="text" name ="question1" v-model='question1'>
+                <input type="text" name="dummy" style="display:none;">
+            </div>
+            <div v-if="problem.type === 'fixBlanksOfProbability'">
+                <input type="text" name ="question1" v-model='question1'>/<input type="text" name ="question2" v-model='question2'>
             </div>
         </form>
         <button class="next-button" @click="nextProblem();resetData()">次の問題へ</button>
@@ -235,14 +260,21 @@ export const problemStatement = Vue.extend({
             switch (this.problem.type){
                 case 'SortFourElement':
                 case 'ThreeBlankFixOfOneSentence':
+                case 'fixBlanksOfProbability':
                     let successFlg = true;
-                    answer.forEach((ans,index)=>{
-                        if (ans !== solution[index] && solution[index] !== undefined) successFlg = false;                        
+                    solution.forEach((sol:string|number,index:number)=>{
+                        if (sol !== answer[index]) successFlg = false;                        
                     });
                     if(successFlg) score += this.problem.points[0];
                     fullScore += this.problem.points[0];
                     break;
                 case 'LongSentenceReading':
+                    solution.forEach((sol: string|number,index:number)=>{
+                        console.log(`sol:${sol}`);
+                        console.log(`ans:${answer[index]}`);
+                        if (answer[index] === sol) score += quest.points[index]
+                        fullScore += quest.points[index]; 
+                    });
                     break;
                 default:
                     solution.forEach((sol: string|number,index:number)=>{
