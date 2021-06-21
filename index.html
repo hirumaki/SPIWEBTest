@@ -10,15 +10,17 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Avalon Consulting SPI模試</h1>
     
     <div id='top-page'>
+      <h2>Avalon Consulting SPI模試</h2>
       <start-screen
       @startexamination="registerCandidate"></start-screen>
     </div>
     
     <div id='problem-field'>
+      <!-- プロダクションでは使いたくないのでオミット
       <problem-number :number='counter'></problem-number>
+      -->
       <div class='body-and-sectiontimer'>
         <problem-body 
           :number = 'counter'
@@ -30,14 +32,6 @@
         :problem='problems[counter]' 
         :testlength='problems.length-1'
         @nextproblem='nextProblem'></problem-statement>
-<!--
-        <single-timer 
-        :limit='problems[counter].limit'
-        :
-        :counter='counter'
-        @nextproblem='nextProblem'
-        ></single-timer>
-        -->
     </div>
 
     <div id='result-field'>
