@@ -1,0 +1,7 @@
+{
+    "notice":"実効になるテストのjsonファイル名を書きこんで下さい",
+    "testList":[
+        "imitationSpiWeb1",
+        "WhiteAcademyTest1"
+    ]
+}

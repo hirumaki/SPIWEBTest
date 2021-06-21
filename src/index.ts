@@ -1,5 +1,6 @@
 import Vue from "vue";
 import axios from "axios";
+import fs from "fs";
 import { problemNumber} from "./problemField/problemNumber";
 import { problemBody } from "./problemField/problemBody";
 import { problemStatement } from "./problemField/problemStatement";
@@ -99,3 +100,27 @@ const sendResult = (result:{score:number,fullScore:number})=>{
 
 Vue.component('single-timer',singleTimer);
 Vue.component('set-timer',setTimer);
+
+
+//axiosでjsonファイルを読み込む
+let testList:string[];
+const loadTests = async() =>{
+await axios.get("../TestJsons/testList.json")
+  .then((request)=>{
+    testList = request.data.testList;
+  });
+const files = ["imitationSpiWeb1","WhiteAcademyTest1"]
+files.forEach((test)=>{
+  const url = `../TestJsons/${test}.json`;
+  console.log(`Load:${url}`)
+  axios.get(url)
+    .then((request)=>{
+      console.log(request.data.name);
+    })
+    .catch((error)=>{
+      console.log(error);
+    })
+  });
+}
+
+loadTests();
