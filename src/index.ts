@@ -58,7 +58,7 @@ if(startButton !== null) startButton.onclick = ()=>{
           const resultField = document.getElementById('result-field');
           if(resultField !== null) resultField.style.display = 'block';
           result.showResult({score:this.score,fullScore:this.fullScore});
-          //sendResult({score:this.score,fullScore:this.fullScore});
+          sendResult({score:this.score,fullScore:this.fullScore});
         }
         this.counter++;
       },

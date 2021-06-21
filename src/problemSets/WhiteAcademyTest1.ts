@@ -75,7 +75,7 @@ export const WhiteAcademyTest1:Problem[] = [
         'ブラジルの公用語はポルトガル語となっている',
         '研究や学習だけでなく、観光や交流においてもそれらの知識を活用することができる',
       ],
-      limit:5,
+      limit:7,
       solution:['エ','ア','オ'],
       points:[1,1,1]
     },
@@ -116,7 +116,7 @@ export const WhiteAcademyTest1:Problem[] = [
         'Aは正しいが、Bは誤り',
         'Aは誤りだが、Bは正しい',
         'AもBも誤り'],
-      limit:5,
+      limit:10,
       solution:['イ','保存','イ'],
       points:[1,1,1]
     },
@@ -136,7 +136,7 @@ export const WhiteAcademyTest1:Problem[] = [
         '消費者心理の穴を突いた巧みな手法は、信頼を損ねかねない',
         'ブランドを守る為とはいえ、何も告知しない点は物議を醸すものである',
       ],
-      limit:5,
+      limit:7,
       solution:['ア'],
       points:[1]
     },
@@ -149,7 +149,7 @@ export const WhiteAcademyTest1:Problem[] = [
         この時飴は全部で[   ]個ある。`],
       questions:[],      
       choices:[],
-      limit:5,
+      limit:3,
       solution:['87'],
       points:[1]
     },
@@ -159,7 +159,7 @@ export const WhiteAcademyTest1:Problem[] = [
       statement:['150人の学生に数学、英語の好き嫌いでアンケートを行ったところ、数学が好きな生徒が72人、英語が好きな生徒が96人、どちらも好きでない生徒が50人、どちらも好きな生徒が[   ]人いることがわかった。'],
       questions:[],      
       choices:[],
-      limit:5,
+      limit:3,
       solution:['68'],
       points:[1]
     },
@@ -169,7 +169,7 @@ export const WhiteAcademyTest1:Problem[] = [
       statement:['1列に並んだ5つの椅子にA,B,C,D,Eの5人が座る時、仲良しのAとDが隣り合って座る方法は[   ]通りある。'],
       questions:[],      
       choices:[],
-      limit:5,
+      limit:3,
       solution:['48'],
       points:[1]
     },
@@ -179,7 +179,7 @@ export const WhiteAcademyTest1:Problem[] = [
       statement:['Aさんは家から図書館まで往復でジョギングをした。行きは毎分180m,帰りは毎分120mで走ったとき、平均速度は毎分[   ]mになる'],
       questions:[],      
       choices:[],
-      limit:5,
+      limit:3,
       solution:['144'],
       points:[1]
     },
@@ -188,10 +188,11 @@ export const WhiteAcademyTest1:Problem[] = [
       body:'次の空欄[  　]に当てはまる数を答えなさい。',
       statement:[`
         流れのある川を、A地点からB地点までボートで上ると15分、B地点からA地点まで下ると10分かかる。
-        流れの速さが毎時3.6kmのとき、A地点とB地点の距離は[  ]mである。`],
+        流れの速さが毎時3.6kmのとき、A地点とB地点の距離は[  ]mである。
+        `],
       questions:[],      
       choices:[],
-      limit:5,
+      limit:3,
       solution:['3600'],
       points:[1]
     },
@@ -229,7 +230,7 @@ export const WhiteAcademyTest1:Problem[] = [
         'AかBのどちらかで分かる',
         'AとBの両方が分かっても分からない'
       ],
-      limit:5,
+      limit:3,
       solution:['オ'],
       points:[1]
     },
@@ -239,7 +240,7 @@ export const WhiteAcademyTest1:Problem[] = [
       statement:['袋の中に赤球が3つ、白球が2つ、黒球が1つ入っている。袋の中から無作為に2つの球をを取り出したとき、異なる色の玉を取り出す確率は[  ]/[  ]である。'],
       questions:[],      
       choices:[],
-      limit:5,
+      limit:3,
       solution:['11','15'],
       points:[1]
     },

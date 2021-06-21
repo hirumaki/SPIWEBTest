@@ -28,7 +28,7 @@ const template = `
                 @timeup='nextProblem'
                 ></single-timer>
             </div>
-            <div id="answer-area" class="second-half">
+            <div class="answer-area" class="second-half">
                 <form id="answer-form">
                     <table> 
                         <tr>
@@ -58,7 +58,7 @@ const template = `
                 @nextproblem='nextProblem'
                 ></set-timer>
             </div>
-            <div id="answer-area" class="second-half">
+            <div class="answer-area" class="second-half">
                 <form id="answer-form">
                     <input type="text" name ="question1" v-model='question2'>
                     <input type="text" name="dummy" style="display:none;">
@@ -79,7 +79,7 @@ const template = `
                 @nextproblem='nextProblem'
                 ></set-timer>
             </div>
-            <div id="answer-area" class="second-half">
+            <div class="answer-area" class="second-half">
                 <form id="answer-form">
                     <table> 
                         <tr>
@@ -124,7 +124,7 @@ const template = `
                 @nextproblem='nextProblem'
                 ></single-timer>
             </div>
-            <div id="answer-area" class="second-half">
+            <div class="answer-area" class="second-half">
                 <form id="answer-form">
                 </form>
                 <button class="next-button" @click="$emit('nextproblem')">次の問題へ</button>
@@ -140,7 +140,7 @@ const template = `
                 @nextproblem='nextProblem'
                 ></set-timer>
             </div>
-            <div id="answer-area" class="second-half">
+            <div class="answer-area" class="second-half">
                 <form id="answer-form"></form>
                 <button class="next-button" @click="$emit('nextproblem')">次の問題へ</button>
             </div>
@@ -158,7 +158,7 @@ const template = `
                 @nextproblem='nextProblem'
                 ></set-timer>
             </div>
-            <div id="answer-area" class="second-half">
+            <div class="answer-area" class="second-half">
                 <form id="answer-form"></form>    
                 <button class="next-button" @click="$emit('nextproblem')">次の問題へ</button>
             </div>
@@ -180,7 +180,7 @@ const template = `
        ></single-timer>
 
     </div>
-    <div id="answer-area" class="second-half">回答欄
+    <div class="answer-area" class="second-half">回答欄
         <form id="answer-form">
             <div v-if="[
                 'IdiomStructure',
