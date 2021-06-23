@@ -1,8 +1,5 @@
+import axios from "axios";
 import Vue from "vue";
-import { Problem } from "../problem";
-import { imitationSpiWeb1 } from "../problemSets/imitationSpiWeb1";
-import { WhiteAcademyPractice1} from "../problemSets/WhiteAcademyPractice1";
-import { WhiteAcademyTest1 } from "../problemSets/WhiteAcademyTest1";
 
 const template = `
 <div class="start-screen">
@@ -16,10 +13,8 @@ const template = `
     </div>
     <div class="test-type-area">
         <p>受験したいテストを選んで下さい</p>
-        <select name="testtype" v-model="testType">
-            <option :value="imitationSpiWeb1" selected>SPIWEbテスト1</option>
-            <option :value="WhiteAcademyPractice1">WhiteAcademy練習1</option>
-            <option :value="WhiteAcademyTest1">WhiteAcademyテスト1</option>
+        <select name="selectedTest" v-model="selectedTest">
+            <option v-for="test in testList" :value ="test.value">{{test.name}}</option>
         </select>
     </div>
     <div id ='start-button' class="btn btn-primary" @click="startExam">start</div>
@@ -32,18 +27,24 @@ export const startScreen = Vue.extend({
         return {
             candidateName:'',
             candidateEmail:'',
-            testType:Object,
-            imitationSpiWeb1,
-            WhiteAcademyPractice1,
-            WhiteAcademyTest1
+            testList:['',''],
+            selectedTest:'WhiteAcademyTest1'//初期値をここに書き込む（v-ifとv-forの併用ができない）
         }
+    },
+    created:async function(){
+            await axios.get("../TestJsons/testList.json")
+            .then((request)=>{
+              this.testList = request.data.testList;
+              console.log('loading testList');
+              console.log(this.testList);
+            });
     },
     methods:{
         startExam:function(){
             const candidateStatus = {
                 name: this.candidateName,
                 email:this.candidateEmail,
-                test: this.testType,
+                test: this.selectedTest,
             }
             this.$emit('startexamination',candidateStatus);
         }

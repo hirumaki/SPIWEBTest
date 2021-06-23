@@ -21,17 +21,6 @@
       "limit":5,
       "solution":["ア","ウ","ア"],
       "points":[1,1,1]
-    },
-    {
-    "type":"Last",
-    "body":"",
-    "statement":[""],
-    "questions":[],
-    "choices":[],
-    "limit":1,
-    "solution":["","","","",""],
-    "points":[0,0,0,0,0]
-
-  }
+    }
   ]
 }

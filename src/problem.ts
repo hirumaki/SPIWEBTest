@@ -8,7 +8,7 @@ export class Problem {
     solution: string[]|number[]; 
     points:number[];
   
-    constructor(
+    constructor(data:{
       type:string,
       body:string,
       statement:string[],
@@ -17,15 +17,25 @@ export class Problem {
       limit: number,
       solution: string[]|number[],
       points:number[]
+    }
     )
     {
-      this.type = type;
-      this.body = body;
-      this.statement = statement;
-      this.questions = questions;
-      this.choices = choices;
-      this.limit = limit;
-      this.solution = solution;
-      this.points = points;
+      this.type = data.type;
+      this.body = data.body;
+      this.statement = data.statement;
+      this.questions = data.questions;
+      this.choices = data.choices;
+      this.limit = data.limit;
+      this.solution = data.solution;
+      this.points = data.points;
     }
   }
+
+export const createTest = (data:any[])=>{
+  console.log(data);
+  const problems = data.map((d)=>{
+    return new Problem(d);
+  });
+  return problems;
+}
+

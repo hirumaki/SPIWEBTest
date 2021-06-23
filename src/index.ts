@@ -10,10 +10,11 @@ import { singleTimer } from "./component/singleTimer";
 import { setTimer } from "./component/setTimer";
 import { resultBody } from "./resultField/resultBody";
 import { Problem } from "./problem";
+import { createTest } from "./problem";
 
 Vue.prototype.$count = 0;
 let problems:Problem[]; 
-let candidateStatus:{name:string,mail:string,test:object};
+let candidateStatus:{name:string,mail:string,test:string};
 
 const startView = new Vue({
   el:'#top-page',
@@ -21,9 +22,20 @@ const startView = new Vue({
     'start-screen':startScreen
   },
   methods:{
-    registerCandidate: function(candidateData:{name:string,mail:string,test:Object}){
+    registerCandidate: async function(candidateData:{name:string,mail:string,test:string}){
       candidateStatus = candidateData;
-      problems = candidateData.test as Problem[];
+      const url = `../TestJsons/${candidateData.test}.json`;
+      console.log(`Load:${url}`)
+      await axios.get(url)
+        .then((request)=>{
+          console.log('loading...')
+          console.log(request.data.name);
+          problems = createTest(request.data.problems);
+          startMain(problems);
+        })
+        .catch((error)=>{
+          console.log(error);
+        });
     }
   }
 })
@@ -34,6 +46,9 @@ if(startButton !== null) startButton.onclick = ()=>{
   if(topPage !== null) topPage.style.display = 'none';
   const problemField = document.getElementById('problem-field');
   if(problemField !== null) problemField.style.display = 'block';
+}
+
+const startMain = (problems:Problem[])=>{
   const main = new Vue({
     el: '#problem-field',
     data:{
@@ -53,45 +68,35 @@ if(startButton !== null) startButton.onclick = ()=>{
         this.score += resultscore.score;
         this.fullScore += resultscore.fullScore;
         console.log(`this.score:${this.score}`);
-        if(this.counter === problems.length-2){//counterを動かさないので、vue.jsの描画が止まる
+        if(this.counter === problems.length-1){//counterを動かさないので、vue.jsの描画が止まる
           const problemField = document.getElementById('problem-field');
           if(problemField !== null) problemField.style.display = 'none';
           const resultField = document.getElementById('result-field');
           if(resultField !== null) resultField.style.display = 'block';
-          result.showResult({score:this.score,fullScore:this.fullScore});
+          showResult({score:this.score,fullScore:this.fullScore});
           sendResult({score:this.score,fullScore:this.fullScore});
-        }
+        }else{
         this.counter++;
+        }
       },
     }
   });
-  
+}
+
+const showResult = (resultscore:{score:number,fullScore:number})=>{
   const result = new Vue({
     el:'#result-field',
     data:{
       problems,
       counter:0,
-      score:0,
-      fullScore:0
+      score:resultscore.score,
+      fullScore:resultscore.fullScore
     },
     components:{
       'result-body':resultBody
     },
-    methods:{
-      showResult:function(resultscore:{score:number,fullScore:number}){
-        this.score = resultscore.score;
-        this.fullScore = resultscore.fullScore;
-        /*
-        console.log(`resultscore.score:${resultscore.score}`);
-        console.log(`resultscore.fullScore:${resultscore.fullScore}`);
-        console.log(`result.score:${this.score}`);
-        console.log(`result.fullScore:${this.fullScore}`);
-       */
-      }
-    }
   });
 }
-
 const sendResult = (result:{score:number,fullScore:number})=>{
   const serverUrl = `http://triple-income.jp/web_test/sendmail.php?score=${result.score}&name=${candidateStatus.name}`;
   //console.log(`${serverUrl}でajaxします。`)
@@ -103,14 +108,14 @@ Vue.component('set-timer',setTimer);
 
 
 //axiosでjsonファイルを読み込む
+/*
 let testList:string[];
 const loadTests = async() =>{
 await axios.get("../TestJsons/testList.json")
   .then((request)=>{
     testList = request.data.testList;
   });
-const files = ["imitationSpiWeb1","WhiteAcademyTest1"]
-files.forEach((test)=>{
+testList.forEach((test)=>{
   const url = `../TestJsons/${test}.json`;
   console.log(`Load:${url}`)
   axios.get(url)
@@ -124,3 +129,4 @@ files.forEach((test)=>{
 }
 
 loadTests();
+*/

@@ -1,0 +1,21 @@
+{
+  "name":"",
+  "problems":[
+    {
+      "type":"selectOneFromChoicesSet",
+      "body":"",
+      "statement":[],
+      "questions":[
+        "",
+        "",
+        ""],
+      "choices":[
+        ["","","",""],
+        ["","","",""],
+        ["","","",""]],
+      "limit":10,
+      "solution":["","",""],
+      "points":[3,4,5]
+    }
+  ]
+}
