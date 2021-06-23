@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files (x86)\Nodist\v-x64\15.2.1\node.exe C:\Program Files (x86)\Nodist\bin\node_modules\yarn\bin\yarn.js add @types/axious
+  C:\Program Files (x86)\Nodist\v-x64\15.2.1\node.exe C:\Program Files (x86)\Nodist\bin\node_modules\yarn\bin\yarn.js add @types/fs
 
 PATH: 
   C:\Program Files\Microsoft MPI\Bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Java\jdk1.8.0_172\bin;C:\Program Files\Git\cmd;C:\Users\index\AppData\roaming\Python\Python37\scripts;C:\Program Files (x86)\Nodist\bin;C:\Program Files\Microsoft VS Code\bin;C:\PROGRA~1\JPKI;C:\Program Files (x86)\Nodist\bin\bin;;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Users\index\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\index\AppData\Local\Programs\Python\Python39\;C:\Users\index\Anaconda3;C:\Users\index\Anaconda3\Library\mingw-w64\bin;C:\Users\index\Anaconda3\Library\usr\bin;C:\Users\index\Anaconda3\Library\bin;C:\Users\index\Anaconda3\Scripts;C:\Users\index\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Microsoft VS Code\bin;C:\Users\index\AppData\Local\atom\bin;C:\Users\index\AppData\Local\Microsoft\WindowsApps;C:\Program Files\heroku\bin;C:\Program Files\MySQL\MySQL Server 5.7\bin;C:\Program Files (x86)\Nodist\bin;C:\Program Files (x86)\Nodist\bin\bin;
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2faxious: Not found
+  Error: https://registry.yarnpkg.com/@types%2ffs: Not found
       at Request.params.callback [as _callback] (C:\Program Files (x86)\Nodist\bin\node_modules\yarn\lib\cli.js:66988:18)
       at Request.self.callback (C:\Program Files (x86)\Nodist\bin\node_modules\yarn\lib\cli.js:140662:22)
       at Request.emit (node:events:329:20)
@@ -36,6 +36,7 @@ npm manifest:
       "typescript": "^4.2.4"
     },
     "dependencies": {
+      "@types/axios": "^0.14.0",
       "@types/jquery": "^3.5.5",
       "@types/progressbar": "^1.1.0",
       "@types/vue": "^2.0.0",
@@ -1144,6 +1145,13 @@ Lockfile:
     dependencies:
       "@types/node" "*"
   
+  "@types/axios@^0.14.0":
+    version "0.14.0"
+    resolved "https://registry.yarnpkg.com/@types/axios/-/axios-0.14.0.tgz#ec2300fbe7d7dddd7eb9d3abf87999964cafce46"
+    integrity sha1-7CMA++fX3d1+udOr+HmZlkyvzkY=
+    dependencies:
+      axios "*"
+  
   "@types/body-parser@*", "@types/body-parser@1.19.0":
     version "1.19.0"
     resolved "https://registry.yarnpkg.com/@types/body-parser/-/body-parser-1.19.0.tgz#0685b3c47eb3006ffed117cdd55164b61f80538f"
@@ -2078,7 +2086,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.11.0.tgz#d61f46d83b2519250e2784daf5b09479a8b41c59"
     integrity sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==
   
-  axios@^0.21.1:
+  axios@*, axios@^0.21.1:
     version "0.21.1"
     resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.1.tgz#22563481962f4d6bde9a76d516ef0e5d3c09b2b8"
     integrity sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==
@@ -3571,6 +3579,11 @@ Lockfile:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
     integrity sha1-FQStJSMVjKpA20onh8sBQRmU6k8=
+  
+  fs@^0.0.1-security:
+    version "0.0.1-security"
+    resolved "https://registry.yarnpkg.com/fs/-/fs-0.0.1-security.tgz#8a7bd37186b6dddf3813f23858b57ecaaf5e41d4"
+    integrity sha1-invTcYa23d84E/I4WLV+yq9eQdQ=
   
   fswin@^2.17.1227:
     version "2.17.1227"
