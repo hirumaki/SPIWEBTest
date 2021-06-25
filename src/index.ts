@@ -7,7 +7,6 @@ import { problemStatement } from "./problemField/problemStatement";
 import { sectionTimer } from "./component/sectionTimer";
 import { startScreen} from "./component/startScreen";
 import { singleTimer } from "./component/singleTimer";
-import { setTimer } from "./component/setTimer";
 import { resultBody } from "./resultField/resultBody";
 import { Problem } from "./problem";
 import { createTest } from "./problem";
@@ -25,28 +24,21 @@ const startView = new Vue({
     registerCandidate: async function(candidateData:{name:string,mail:string,test:string}){
       candidateStatus = candidateData;
       const url = `../TestJsons/${candidateData.test}.json`;
-      console.log(`Load:${url}`)
+      const topPage = document.getElementById('top-page');
+      if(topPage !== null) topPage.style.display = 'none';
+      const problemField = document.getElementById('problem-field');
+      if(problemField !== null) problemField.style.display = 'block';
       await axios.get(url)
         .then((request)=>{
-          console.log('loading...')
-          console.log(request.data.name);
           problems = createTest(request.data.problems);
           startMain(problems);
         })
         .catch((error)=>{
-          console.log(error);
+          console.log('エラーが発生しました。');
         });
     }
   }
-})
-
-const startButton = document.getElementById('start-button');
-if(startButton !== null) startButton.onclick = ()=>{
-  const topPage = document.getElementById('top-page');
-  if(topPage !== null) topPage.style.display = 'none';
-  const problemField = document.getElementById('problem-field');
-  if(problemField !== null) problemField.style.display = 'block';
-}
+});
 
 const startMain = (problems:Problem[])=>{
   const main = new Vue({
@@ -74,7 +66,8 @@ const startMain = (problems:Problem[])=>{
           const resultField = document.getElementById('result-field');
           if(resultField !== null) resultField.style.display = 'block';
           showResult({score:this.score,fullScore:this.fullScore});
-          sendResult({score:this.score,fullScore:this.fullScore});
+          //簡易テストの場合はコメントアウトする
+          //sendResult({score:this.score,fullScore:this.fullScore});
         }
         this.counter++;
       },
@@ -104,4 +97,3 @@ const sendResult = (result:{score:number,fullScore:number})=>{
 }
 
 Vue.component('single-timer',singleTimer);
-Vue.component('set-timer',setTimer);

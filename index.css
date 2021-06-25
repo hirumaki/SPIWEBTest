@@ -3,6 +3,10 @@
     background-color: rgb(158, 184, 233);
 }
 
+.alert-box{
+    color:red;
+}
+
 #start-button{
     background-color: darkgray;
 }
@@ -63,6 +67,11 @@ select{
 
 #top-page{
     display: block;
+}
+
+.alert-box{
+    position: relative;
+    padding: 10px 10px 0px;
 }
 
 #start-button{
