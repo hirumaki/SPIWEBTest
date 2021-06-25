@@ -17,7 +17,11 @@ const template = `
             <option v-for="test in testList" :value ="test.value">{{test.name}}</option>
         </select>
     </div>
-    <div id ='start-button' class="btn btn-primary" @click="startExam">start</div>
+    <div class="policy-agreement">
+        <input class="policy-agreement-child" type="checkbox">
+        <span class="policy-agreement-child">ホワイトアカデミーの個人情報保護方針に同意します。</span>
+    </div>
+    <div id ='start-button' @click="startExam">start</div>
 </div>
 `;
 

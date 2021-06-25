@@ -75,9 +75,8 @@ const startMain = (problems:Problem[])=>{
           if(resultField !== null) resultField.style.display = 'block';
           showResult({score:this.score,fullScore:this.fullScore});
           sendResult({score:this.score,fullScore:this.fullScore});
-        }else{
-        this.counter++;
         }
+        this.counter++;
       },
     }
   });
@@ -90,7 +89,8 @@ const showResult = (resultscore:{score:number,fullScore:number})=>{
       problems,
       counter:0,
       score:resultscore.score,
-      fullScore:resultscore.fullScore
+      fullScore:resultscore.fullScore,
+      candidateName:candidateStatus.name
     },
     components:{
       'result-body':resultBody
@@ -105,28 +105,3 @@ const sendResult = (result:{score:number,fullScore:number})=>{
 
 Vue.component('single-timer',singleTimer);
 Vue.component('set-timer',setTimer);
-
-
-//axiosでjsonファイルを読み込む
-/*
-let testList:string[];
-const loadTests = async() =>{
-await axios.get("../TestJsons/testList.json")
-  .then((request)=>{
-    testList = request.data.testList;
-  });
-testList.forEach((test)=>{
-  const url = `../TestJsons/${test}.json`;
-  console.log(`Load:${url}`)
-  axios.get(url)
-    .then((request)=>{
-      console.log(request.data.name);
-    })
-    .catch((error)=>{
-      console.log(error);
-    })
-  });
-}
-
-loadTests();
-*/
