@@ -8,9 +8,9 @@ export const problemBody = Vue.extend({
         }
     },
     template: `
-    <div class="body-and-timer problem-body">
+    <div id="problem-body" class="first-half">
         <div class="body">
-            <p>{{ problem.body }}</p>
+            <p v-html="problem.body"></p>
         </div>
         <div class="statement">
             <div v-if="
@@ -37,5 +37,10 @@ export const problemBody = Vue.extend({
         </div>
     </div>`,
     created:function(){
+    },
+    watch:{
+        problem:function(){
+            if(this.problem === undefined) this.$destroy();
+        }
     }
 });

@@ -2,14 +2,6 @@
     "notice":"実効になるテストのjsonファイル名を書きこんで下さい",
     "testList":[
         {
-            "name":"SPIWEBテスティング模擬試験1",
-            "value":"imitationSpiWeb1"
-        },
-        {
-            "name":"（内定保証対象）ホワイトアカデミーテスト",
-            "value":"WhiteAcademyTest1"
-        },
-        {
             "name":"簡易テスト1",
             "value":"simpleTest1"
         },
@@ -32,24 +24,6 @@
         {
             "name":"簡易テスト6",
             "value":"simpleTest6"
-        },
-        {
-            "name":"簡易テスト7",
-            "value":"simpleTest7"
-        },
-        {
-            "name":"簡易テスト8",
-            "value":"simpleTest8"
-        },
-        {
-            "name":"簡易テスト9",
-            "value":"simpleTest9"
-        },
-        {
-            "name":"簡易テスト10",
-            "value":"simpleTest10"
         }
-
-
     ]
 }

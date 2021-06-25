@@ -1,7 +1,7 @@
 import Vue from "vue";
 
 const template = `
-<div class="body-and-timer">
+<div id="section-timer" class="first-half">
     <p>現在{{ second }}秒が経過しました。</p>
 </div>
 `;

@@ -1,0 +1,55 @@
+{
+    "notice":"全てのテストのデータが記載されています。",
+    "testList":[
+        {
+            "name":"SPIWEBテスティング模擬試験1",
+            "value":"imitationSpiWeb1"
+        },
+        {
+            "name":"（内定保証対象）ホワイトアカデミーテスト",
+            "value":"WhiteAcademyTest1"
+        },
+        {
+            "name":"簡易テスト1",
+            "value":"simpleTest1"
+        },
+        {
+            "name":"簡易テスト2",
+            "value":"simpleTest2"
+        },
+        {
+            "name":"簡易テスト3",
+            "value":"simpleTest3"
+        },
+        {
+            "name":"簡易テスト4",
+            "value":"simpleTest4"
+        },
+        {
+            "name":"簡易テスト5",
+            "value":"simpleTest5"
+        },
+        {
+            "name":"簡易テスト6",
+            "value":"simpleTest6"
+        },
+        {
+            "name":"簡易テスト7",
+            "value":"simpleTest7"
+        },
+        {
+            "name":"簡易テスト8",
+            "value":"simpleTest8"
+        },
+        {
+            "name":"簡易テスト9",
+            "value":"simpleTest9"
+        },
+        {
+            "name":"簡易テスト10",
+            "value":"simpleTest10"
+        }
+
+
+    ]
+}
