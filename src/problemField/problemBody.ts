@@ -10,7 +10,7 @@ export const problemBody = Vue.extend({
     template: `
     <div id="problem-body" class="first-half">
         <div class="body">
-            <p>{{ problem.body }}</p>
+            <p v-html="problem.body"></p>
         </div>
         <div class="statement">
             <div v-if="

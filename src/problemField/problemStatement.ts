@@ -208,7 +208,6 @@ export const problemStatement = Vue.extend({
             this.changeTab(0);
         },
         nextProblem:function(){
-            console.log(`${this.counter} end next!!`)
             let score = 0;
             let fullScore = 0;
             let quest = this.problem as Problem;
@@ -233,16 +232,12 @@ export const problemStatement = Vue.extend({
                     break;
                 case 'LongSentenceReading':
                     solution.forEach((sol: string|number,index:number)=>{
-                        console.log(`sol:${sol}`);
-                        console.log(`ans:${answer[index]}`);
                         if (answer[index] === sol) score += quest.points[index]
                         fullScore += quest.points[index]; 
                     });
                     break;
                 default:
                     solution.forEach((sol: string|number,index:number)=>{
-                        console.log(`sol:${sol}`);
-                        console.log(`ans:${answer[index]}`);
                         if (answer[index] === sol) score += quest.points[index]
                         fullScore += quest.points[index]; 
                     });
@@ -258,6 +253,8 @@ export const problemStatement = Vue.extend({
             this.tabNum = tabNum;
         }
     },
+//プロダクションでは不要な部分
+/*
     watch:{
         question1:function(){
             console.log(`q1:${this.question1}`);
@@ -275,5 +272,6 @@ export const problemStatement = Vue.extend({
             console.log(`q5:${this.question5}`);
         },
     },
+*/
     template,
 });
