@@ -1,4 +1,5 @@
-/*色周りのスタイル*/
+/*固定のスタイル*/
+/*スタート画面*/
 .start-screen{
     background-color: rgb(158, 184, 233);
 }
@@ -11,12 +12,18 @@
     background-color: darkgray;
 }
 
+/*試験中の画面*/
 #problem-field{
-    background-color: whitesmoke;
+    border: solid 1px #000;
 }
 
-.problem-body{
-    overflow-y: scroll;
+#body-and-sectiontimer{
+    border-bottom: solid 1px #000;
+    background-color: #c5DBF2;
+}
+
+#problem-statement-field{
+    border-right: dashed 1px #000;
 }
 
 .next-button{
@@ -45,18 +52,19 @@
 }
 
 .tab-buttons{
-    background-color: gray;
+    background-color: white;
+    border: solid 1px  #000;
 }
 
 .selected-tab{
-    background-color: orange;
+    background-color: #0090bb;
+    border:solid 1px #000;
 }
 
 #result-field{
     background-color: rgb(199, 214, 243);
 }
 
-/*以下は、固定のスタイル*/
 input[type="text"]{
     font-size: 20px;
 }
@@ -87,6 +95,7 @@ select{
     display: none;
 }
 
+
 form#answer-form{
     margin: 0 10%;
 }
@@ -101,7 +110,7 @@ th.problem-choice-background{
     height:25px;
 }
 
-
+/*終了画面*/
 #result-field{
     top:100px;
     display: none;
@@ -112,6 +121,7 @@ th.problem-choice-background{
 /*タブレット以上の場合*/
 @media (min-width:580px)
 {
+    /*スタート画面*/
     .title{
         text-align: center;
     }
@@ -142,28 +152,9 @@ th.problem-choice-background{
         vertical-align: middle;
     }    
 
+    /*問題表示部分*/
     #problem-field{
         margin:20px;
-    }
-
-    .first-half{
-        display: inline-block; 
-        vertical-align:top; 
-    }
-
-    #problem-body{
-        width: 50%;
-    }
-
-    #section-timer{
-        width: 29%;
-        margin-left: 20%;
-    }
-
-    .second-half{
-        display: inline-block; 
-        width:49.5%;
-        vertical-align:top; 
     }
 
     .body-and-sectiontimer{
@@ -172,15 +163,58 @@ th.problem-choice-background{
         margin: 0px;
     }
 
-    .problem-body{
+
+    #problem-body{
+        width: 55%;
+        margin-left: 4%;
+        margin-right: 4%;
         height:300px;
+        display: inline-block; 
+        vertical-align:top; 
     }
 
-    .problem-statement{
+    #section-timer{
+        width: 30%;
+        display: inline-block; 
+        vertical-align:top; 
+    }
+
+    #problem-statement{
         position: relative;
         width:100%;
         height:400px;
         margin: 0px;
+    }
+
+    #problem-statement-field{
+        display: inline-block; 
+        margin-left: 4%;
+        height: 100%;
+        width:45%;
+        vertical-align:top; 
+    }
+
+    #answer-field{
+        display: inline-block; 
+        position:relative;
+        margin-right: 4%;
+        width:45%;
+        height:100%;
+        vertical-align:top; 
+    }
+
+    #single-timer{
+        position: absolute;
+        bottom :5%;
+        left :15%;
+        width:80%;
+    }
+    #next-button{
+        position: absolute;
+        height: 30px;
+        width : 150px;
+        bottom : 15%;
+        right:-10%;
     }
 
     th.small-question-num{
@@ -216,15 +250,7 @@ th.problem-choice-background{
         height: 100px;
     }
 
-    #single-timer{
-        position: relative;
-        left :5%;
-        width:40%;
-    }
-    .next-button{
-        position: absolute;
-        left:80%;
-    }
+
 
     #result-field{
         width: 580px;

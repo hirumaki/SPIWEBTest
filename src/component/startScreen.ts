@@ -1,5 +1,4 @@
 import axios from "axios";
-import { data } from "jquery";
 import Vue from "vue";
 
 const template = `
@@ -9,12 +8,12 @@ const template = `
         <input type="text" placeholder="名前をフルネームで記入" v-model = "candidateName">
     </div>`
     //簡易テスト用ではmail-areaをコメントアウト
-    
+    /*
     +`<div class="mail-area">
         <p>貴方のメールアドレスを記入して下さい</p>
         <input type="text" placeholder="メールアドレスを記入" v-model="candidateEmail">
     </div>`
-    
+    */
     +`<div class="test-type-area">
         <p>受験したいテストを選んで下さい</p>
         <select name="selectedTest" v-model="selectedTest">
@@ -54,12 +53,13 @@ export const startScreen = Vue.extend({
         checkForms:function(){
             this.alert = ""
             if (this.candidateName === '') this.alert += '名前を入力してください<br>';
-            if (this.candidateEmail === '') this.alert += 'メールアドレスを入力してください<br>';
+            //if (this.candidateEmail === '') this.alert += 'メールアドレスを入力してください<br>';
             if (!this.agreed) this.alert += '個人情報保護方針に同意してください';
             if (this.alert === '') this.checkTested();
             
         },
         checkTested:async function(){
+            /*
             const tested:boolean = await axios.get(`apps/grades/tested/name/${this.candidateName}/mail/${this.candidateEmail}/type/${this.selectedTest}`)
             .then((data)=>{
                 if (data.data) this.alert = '既に受検済です。'
@@ -70,6 +70,8 @@ export const startScreen = Vue.extend({
                 return true;
             });
             if(!tested) this.startExam();
+            */
+            this.startExam();//
         },
         startExam:function(){
             const candidateStatus = {

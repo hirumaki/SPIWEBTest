@@ -68,7 +68,7 @@ const startMain = (problems:Problem[])=>{
           if(resultField !== null) resultField.style.display = 'block';
           showResult({score:this.score,fullScore:this.fullScore});
           //簡易テストの場合はコメントアウト
-          sendResult({score:this.score,fullScore:this.fullScore});
+          //sendResult({score:this.score,fullScore:this.fullScore});
         }
         this.counter++;
       },
