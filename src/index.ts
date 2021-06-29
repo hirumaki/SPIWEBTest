@@ -1,6 +1,5 @@
 import Vue from "vue";
 import axios from "axios";
-import fs from "fs";
 import { problemNumber} from "./problemField/problemNumber";
 import { problemBody } from "./problemField/problemBody";
 import { problemStatement } from "./problemField/problemStatement";
@@ -23,7 +22,9 @@ const startView = new Vue({
   methods:{
     registerCandidate: async function(candidateData:{name:string,mail:string,test:string}){
       candidateStatus = candidateData;
+      console.log(`candidateEmail:${candidateStatus.mail}`);
       const url = `../TestJsons/${candidateData.test}.json`;
+      //const url = `../web_test/TestJsons/${candidateData.test}.json`//x-serverデプロイ時にアクティブ
       const topPage = document.getElementById('top-page');
       if(topPage !== null) topPage.style.display = 'none';
       const problemField = document.getElementById('problem-field');
@@ -66,11 +67,14 @@ const startMain = (problems:Problem[])=>{
           const resultField = document.getElementById('result-field');
           if(resultField !== null) resultField.style.display = 'block';
           showResult({score:this.score,fullScore:this.fullScore});
-          //簡易テストの場合はコメントアウトする
-          //sendResult({score:this.score,fullScore:this.fullScore});
+          //簡易テストの場合はコメントアウト
+          sendResult({score:this.score,fullScore:this.fullScore});
         }
         this.counter++;
       },
+      timeUp:function(){
+        showResult({score:this.score,fullScore:this.fullScore})
+      }
     }
   });
 }
@@ -91,9 +95,16 @@ const showResult = (resultscore:{score:number,fullScore:number})=>{
   });
 }
 const sendResult = (result:{score:number,fullScore:number})=>{
-  const serverUrl = `http://triple-income.jp/web_test/sendmail.php?score=${result.score}&name=${candidateStatus.name}`;
-  //console.log(`${serverUrl}でajaxします。`)
-  axios.get(serverUrl);
+  //const serverUrl = `http://triple-income.jp/web_test/sendmail.php?score=${result.score}&name=${candidateStatus.name}`;
+  const serverUrl = `apps/grades/name/${candidateStatus.name}/mail/${candidateStatus.mail}/grade/${result.score}/type/${candidateStatus.test}`;
+  console.log(`${serverUrl}でajaxします。`)
+  axios.get(serverUrl)
+  .then((data)=>{
+    console.log(data);
+  })
+  .catch((err)=>{
+    console.log(err);
+  });
 }
 
 Vue.component('single-timer',singleTimer);
