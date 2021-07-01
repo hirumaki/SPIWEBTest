@@ -55,7 +55,7 @@ export const problemBody = Vue.extend({
     watch:{
         problem:function(){
             if(this.problem === undefined) this.$destroy();
-            console.log(this.problem.body.length);
+            //console.log(this.problem.body.length);
         }
     }
 });

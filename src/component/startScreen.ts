@@ -42,8 +42,8 @@ export const startScreen = Vue.extend({
         }
     },
     created:async function(){
-            const testListPath = "../TestJsons/testList.json";
-            //const testListPath = "../web_test/TestJsons/testList.json";//X-server向けのデプロイ時にアクティブ
+            //const testListPath = "../TestJsons/testList.json";
+            const testListPath = "../web_test/TestJsons/testList.json";//X-server向けのデプロイ時にアクティブ
             await axios.get(testListPath)
             .then((request)=>{
               this.testList = request.data.testList;
