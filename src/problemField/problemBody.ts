@@ -1,16 +1,30 @@
 import Vue from "vue";
 
-
 export const problemBody = Vue.extend({
     props:{
         problem:{
             type:Object
         }
     },
+    data:function(){
+        return {
+            style :{
+                "overflow-y":"scroll"
+            }
+        }
+    },
     template: `
     <div id="problem-body" class="first-half">
-        <div class="body">
-            <p v-html="problem.body"></p>
+        <div id="body" v-if="problem.body.length<200">
+            <p  v-html="problem.body"
+                style="height:200px;"
+                ></p>
+        </div>
+        <div id="body" v-else>
+            <p>次の文章を読んで、後の問題に答えなさい</p>
+            <p  v-html="problem.body"
+                style="height:200px; overflow-y:scroll"
+            ></p>
         </div>
         <div class="statement">
             <div v-if="
@@ -41,6 +55,7 @@ export const problemBody = Vue.extend({
     watch:{
         problem:function(){
             if(this.problem === undefined) this.$destroy();
+            //console.log(this.problem.body.length);
         }
     }
 });

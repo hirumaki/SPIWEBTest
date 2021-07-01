@@ -5,11 +5,10 @@ import { Problem } from "../problem";
 //選択肢を使う問題は、問題数、選択肢数でラジオボタンを二次元配置する形にしている。
 //自由入力型の問題は、入力欄を表示し、それをquestion1の値へ埋め込んでいる。
 const template = `
-<div class="statement-area">
-    <div v-if="problem === undefined" class="problem-statement">
-    </div>
-    <div v-else-if="problem.type==='LongSentenceReading'" class="problem-statement">
-        <div class="contents" id="questionTabContent">
+<div id="problem-statement">
+    <div v-if="problem === undefined" id="problem-statement-field"></div>
+    <div v-else-if="problem.type==='LongSentenceReading'" id="problem-statement-field">
+        <div class="contents" id="question-tab-content">
             <div id="question0" v-if="tabNum === 0">    
                 <div class="statement-area second-half">
                     <p v-html="problem.questions[0]"></p>
@@ -72,59 +71,76 @@ const template = `
             </div>
         </div>
         <div class="tabs">
-        <div 
-            v-for="(question,questNum) in problem.questions"
-            @click = "changeTab(questNum)"
-            class="tab-buttons"
-            :class="{'active selected-tab':tabNum === questNum}"
-            >{{ questNum+1 }}</div>
-        </div>
-    </div>
-    <div v-else-if="problem.type==='selectOneFromChoicesSet'" class="problem-statement">
-        <div class="contents">
             <div 
-                v-for="(question,questNum) in problem.questions" 
-                :id="'question'+questNum" 
-                role="tabpanel" 
-                :aria-labelledby="'tab'+questNum">    
-                    <div v-if="tabNum === questNum">
-                        <div class="statement-area second-half">
-                            <p v-html="problem.questions[questNum]"></p>
-                            <div v-for="(choice,index) in problem.choices[questNum]">
-                                <p>{{ ['ア','イ','ウ','エ','オ'][index] }}:{{ choice }}</p>
-                            </div>
-                        </div>
-                        <div class="answer-area second-half">
-                            <form class="answer-form">
-                                <table> 
-                                    <tr>
-                                        <th></th>
-                                        <th v-for='(choice,index) in problem.choices[questNum]'>
-                                            {{['ア','イ','ウ','エ','オ'][index]}}
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <th></th>
-                                        <th v-for='(choice,choiceNum) in problem.choices[questNum]'>                        
-                                            <input type="radio" class="problem-choices" :name="'question'+questNum" :value="['ア','イ','ウ','エ','オ'][choiceNum]" v-model='$data["question"+(questNum+1)]'>
-                                        </th>           
-                                    </tr>
-                                </table>
-                            </form>
-                        </div>
-                    </div>    
-            </div>
+                v-for="(question,questNum) in problem.questions"
+                @click = "changeTab(questNum)"
+                class="tab-buttons"
+                :class="{'active selected-tab':tabNum === questNum}"
+                >{{ questNum+1 }}</div>
         </div>
-        <div class="tabs">
+        <single-timer  
+        v-if= "problem !== undefined"      
+        :limit='problem.limit'
+        :counter='counter'
+        :testlength='testlength'
+        @timeup='nextProblem'>
+        </single-timer>
+        <button id="next-button" @click="nextProblem();resetData()">次の問題へ</button>
+    </div>
+    <div v-else-if="problem.type==='selectOneFromChoicesSet'" id="problem-statement">
+        <div id = "problem-statement-field">
+            <div    v-for="(question,questNum) in problem.questions" 
+                    :id="'question'+questNum">
+                <div v-if="tabNum === questNum">
+                        <p v-html="problem.questions[questNum]"></p>
+                        <div v-for="(choice,index) in problem.choices[questNum]">
+                            <p>{{ ['ア','イ','ウ','エ','オ'][index] }}:{{ choice }}</p>
+                        </div>
+                </div>    
+            </div>
+            <div class="tabs">
                 <div 
                     v-for="(question,questNum) in problem.questions"
                     @click = "changeTab(questNum)"
                     class="tab-buttons"
                     :class="{'active selected-tab':tabNum === questNum}"
-                    >{{ questNum+1 }}</div>
+                    >{{ questNum+1 }}
+                </div>
+            </div>
+        </div>
+        <div id ="answer-field">
+            <div    v-for="(question,questNum) in problem.questions" 
+                    :id="'question'+questNum" >
+                <div v-if="tabNum === questNum">
+                    <form class="answer-form">
+                        <table> 
+                            <tr>
+                                <th></th>
+                                <th v-for='(choice,index) in problem.choices[questNum]'>
+                                    {{['ア','イ','ウ','エ','オ'][index]}}
+                                </th>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <th v-for='(choice,choiceNum) in problem.choices[questNum]'>                        
+                                    <input type="radio" class="problem-choices" :name="'question'+questNum" :value="['ア','イ','ウ','エ','オ'][choiceNum]" v-model='$data["question"+(questNum+1)]'>
+                                </th>           
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <single-timer  
+                v-if= "problem !== undefined"      
+                :limit='problem.limit'
+                :counter='counter'
+                :testlength='testlength'
+                @timeup='nextProblem'>
+            </single-timer>
+            <button id="next-button" @click="nextProblem();resetData()">次の問題へ</button>
         </div>
     </div>
-    <div v-else class="problem-statement">
+    <div v-else id="problem-statement">
         <div class="statement-area second-half">
             <div v-for="(choice,index) in problem.choices">
                 <p>
@@ -169,15 +185,15 @@ const template = `
                 </div>
             </form>
         </div>
+        <single-timer  
+            v-if= "problem !== undefined"      
+            :limit='problem.limit'
+            :counter='counter'
+            :testlength='testlength'
+            @timeup='nextProblem'>
+        </single-timer>
+        <button id="next-button" @click="nextProblem();resetData()">次の問題へ</button>
     </div>
-    <single-timer  
-    v-if= "problem !== undefined"      
-    :limit='problem.limit'
-    :counter='counter'
-    :testlength='testlength'
-    @timeup='nextProblem'
-    ></single-timer>
-    <button class="next-button" @click="nextProblem();resetData()">次の問題へ</button>
 </div>
 `;
 

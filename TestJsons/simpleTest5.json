@@ -63,7 +63,7 @@
         ["奇危一発","危気一発","危機一髪","危機一発"]],
       "limit":10,
       "solution":["イ","ア","ウ"],
-      "points":[3,4,5]
+      "points":[2,2,3]
     },
     {
       "type":"selectOneFromChoicesSet",
@@ -77,7 +77,7 @@
       ],
       "limit":10,
       "solution":["ア"],
-      "points":[3,4,5]
+      "points":[2,2,3]
     }
   ]
 }

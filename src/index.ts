@@ -22,9 +22,9 @@ const startView = new Vue({
   methods:{
     registerCandidate: async function(candidateData:{name:string,mail:string,test:string}){
       candidateStatus = candidateData;
-      console.log(`candidateEmail:${candidateStatus.mail}`);
-      const url = `../TestJsons/${candidateData.test}.json`;
-      //const url = `../web_test/TestJsons/${candidateData.test}.json`//x-serverデプロイ時にアクティブ
+      //console.log(`candidateEmail:${candidateStatus.mail}`);
+      //const url = `../TestJsons/${candidateData.test}.json`;
+      const url = `../web_test/TestJsons/${candidateData.test}.json`//x-serverデプロイ時にアクティブ
       const topPage = document.getElementById('top-page');
       if(topPage !== null) topPage.style.display = 'none';
       const problemField = document.getElementById('problem-field');
@@ -60,7 +60,6 @@ const startMain = (problems:Problem[])=>{
       nextProblem:function(resultscore:{score:number,fullScore:number}){
         this.score += resultscore.score;
         this.fullScore += resultscore.fullScore;
-        console.log(`this.score:${this.score}`);
         if(this.counter === problems.length-1){//counterを動かさないので、vue.jsの描画が止まる
           const problemField = document.getElementById('problem-field');
           if(problemField !== null) problemField.style.display = 'none';
@@ -95,9 +94,9 @@ const showResult = (resultscore:{score:number,fullScore:number})=>{
   });
 }
 const sendResult = (result:{score:number,fullScore:number})=>{
-  //const serverUrl = `http://triple-income.jp/web_test/sendmail.php?score=${result.score}&name=${candidateStatus.name}`;
-  const serverUrl = `apps/grades/name/${candidateStatus.name}/mail/${candidateStatus.mail}/grade/${result.score}/type/${candidateStatus.test}`;
-  console.log(`${serverUrl}でajaxします。`)
+  const serverUrl = `http://triple-income.jp/web_test/sendmail.php?score=${result.score}&name=${candidateStatus.name}&type=${candidateStatus.test}`;//簡易テスト
+  //const serverUrl = `apps/grades/name/${candidateStatus.name}/mail/${candidateStatus.mail}/grade/${result.score}/type/${candidateStatus.test}`;
+  //console.log(`${serverUrl}でajaxします。`)
   axios.get(serverUrl)
   .then((data)=>{
     console.log(data);

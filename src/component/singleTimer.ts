@@ -2,7 +2,7 @@ import Vue from "vue";
 
 const template = `
 <div id="single-timer">
-    <div style='height:20px;'></div>
+    <div style='height:10px;'></div>
     <div style='display:flex;'>
         <div class='margin-block'></div>
         <div class='body-block' v-bind:style="single1Color"></div>
@@ -30,6 +30,7 @@ const template = `
         <div class='body-block' v-bind:style="single12Color"></div>
         <div class='margin-block'></div>
     </div>
+    <div style='height:10px;'></div>
 </div>
 `
 

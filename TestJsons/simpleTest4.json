@@ -64,7 +64,7 @@
         ["パンデミック","インヴォーク","エスカレート","エレクトリック"]],
       "limit":10,
       "solution":["エ","ア","ウ"],
-      "points":[3,4,5]
+      "points":[2,2,3]
     },
     {
       "type":"selectOneFromChoicesSet",
